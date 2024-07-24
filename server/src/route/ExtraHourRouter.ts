@@ -33,12 +33,11 @@ extraHourRouter.patch(
     '/extrahours/:uid',
     celebrate({
         body: Joi.object({
-            user_uid: Joi.string(),
             title: Joi.string(),
             description: Joi.string().max(100),
             date: Joi.date(),
             amount: Joi.number(),
-            employe_uid: Joi.string(),
+            employee_uid: Joi.string(),
         }).min(1)
     }),
     extraHourController.update as RequestHandler
