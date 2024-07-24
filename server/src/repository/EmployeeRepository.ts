@@ -1,33 +1,36 @@
 import { db } from "../util/admin";
-import ExtraHour from "../model/ExtraHour";
+import Employee from "../model/Employee";
 import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
 
-class ExtraHourRepository extends AppRepository {
-
-    async add(extraHour: ExtraHour): Promise<any>
+class EmployeeRepository extends AppRepository 
+{
+    async add(employee: Employee): Promise<any>
     {
         try {
             let result;
-            const newExtraHour = {
-                ...extraHour,
+            const newEmployee = {
+                ...employee,
                 created: this.getDateTime(),
                 modified: null,
                 deleted: null,
             };
 
-            await db.collection("ExtraHours").add(newExtraHour)
+            await db.collection("Employees").add(newEmployee)
                 .then(async (docRef) => {
-                    result = docRef.get();
+                    result = {
+                        uid: docRef.id,
+                        ...newEmployee
+                    };
                 })
                 .catch((error) => {
-                    console.error("Error on ExtraHour add: ", error);
+                    console.error("Error on Employee add: ", error);
                     throw error;
                 })
 
             return result;
         } catch (error) {
-            console.error("Error on ExtraHour add: ", error);
+            console.error("Error on Employee add: ", error);
             throw error;
         }
     }
@@ -36,41 +39,43 @@ class ExtraHourRepository extends AppRepository {
     {
         try {
             let result;
-            await db.collection("ExtraHours")
+            await db.collection("Employees")
                 .doc(uid)
                 .get()
                 .then((doc) => {
                     if (doc.exists) {
-                        const extraHour = doc.data();
-                        if (!extraHour?.deleted) {
-                            result = extraHour;
+                        const employee = doc.data();
+                        if (!employee?.deleted) {
+                            result = employee;
                         }
                     }
                 })
                 .catch((error) => {
-                    console.error("Error to get ExtraHour by id from Firestore: ", error);
+                    console.error("Error on Employee getById: ", error);
                     throw error;
                 })
 
             return result;
         } catch (error) {
-            console.error("Error to get ExtraHour by id: ", error);
+            console.error("Error on Employee getById: ", error);
             throw error;
         }
     }
 
-    async getTotalExtraHoursByUser(userUid: string): Promise<number>
+    async getTotalEmployeesByUser(userUid: string): Promise<number>
     {
         try {
+            console.log(userUid);
             const querySnapshot = await db
-                .collection("ExtraHours")
-                .where("user_uid.id", "==", userUid)
-                .where("deleted", "==", null)
+                .collection("Employees")
+                .where("user_uid", "==", userUid)
+                //.where("deleted", "==", null)
                 .get();
+            console.log('size ', querySnapshot.size);
 
             return querySnapshot.size;
         } catch (error) {
-            console.error("Error to get total ExtraHours by user: ", error);
+            console.error("Error on Employee getTotalEmployeesByUser: ", error);
             throw error;
         }
     }
@@ -79,35 +84,37 @@ class ExtraHourRepository extends AppRepository {
     {
         try {
             let query = db
-                .collection("ExtraHours")
+                .collection("Employees")
                 .where("user_uid", '==', userUid)
                 .where("deleted", "==", null)
                 .orderBy("created")
                 .limit(limit);
+            console.log(userUid);
             if (lastDocument) {
                 query = query.startAfter(lastDocument);
             }
             const snapshot = await query.get();
+            console.log('size ', snapshot);
 
             return snapshot;
         } catch (error) {
-            console.error("Error on ExtraHour getNextPageByUser: ", error);
+            console.error("Error on Employee getNextPageByUser: ", error);
             throw error;
         }
     }
 
-    async update(extraHour: ExtraHour, uid: string): Promise<any>
+    async update(employee: Employee, uid: string): Promise<any>
     {
         try {
-            const updatedExtraHour = {
-                ...extraHour,
+            const updatedEmployee = {
+                ...employee,
                 modified: this.getDateTime(),
             }
-            await db.collection("ExtraHours").doc(uid).update(updatedExtraHour)
+            await db.collection("Employees").doc(uid).update(updatedEmployee)
 
             return this.getById(uid);
         } catch (error) {
-            console.error("Error on ExtraHour update: ", error);
+            console.error("Error on Employee update: ", error);
             throw error;
         }
     }
@@ -115,16 +122,15 @@ class ExtraHourRepository extends AppRepository {
     async delete(uid: string): Promise<any>
     {
         try {
-            const extraHourRef = db.collection("ExtraHours").doc(uid);
-            await extraHourRef.update({
+            const employeeRef = db.collection("Employees").doc(uid);
+            await employeeRef.update({
                 deleted: this.getDateTime(),
             });
         } catch (error) {
-            console.error("Error to delete User: ", error);
+            console.error("Error on Employee delete: ", error);
             throw error;
         }
     }
-
 }
 
-export default ExtraHourRepository;
+export default EmployeeRepository;

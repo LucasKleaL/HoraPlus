@@ -5,3 +5,5 @@ type Employee = {
     role: Array<string>,
     department: Array<string>,
 }
+
+export default Employee;

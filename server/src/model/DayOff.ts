@@ -5,7 +5,7 @@ type DayOff = {
     description?: string,
     date: Date,
     amount: Float32Array,
-    employe_uid: string,
+    employee_uid: string,
 };
 
 export default DayOff;
