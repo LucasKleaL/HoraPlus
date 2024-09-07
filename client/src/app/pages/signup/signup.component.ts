@@ -47,7 +47,7 @@ export class SignupComponent extends AppComponent implements OnInit {
     console.log('signup');
     try {
       this.isLoading = true;
-      const encryptedPassword = this.encryptPassword();
+      const encryptedPassword = this.encryptPassword(this.registerForm);
       const systemRole = 'user';
       const newUser = new User(
         this.registerForm.get('email')?.value,
@@ -58,10 +58,12 @@ export class SignupComponent extends AppComponent implements OnInit {
         this.registerForm.get('department')?.value,
       );
       await this.userService
-        .AddUser(newUser)
+        .addUser(newUser)
         .then((response) => {
-          this.router.navigateByUrl('/login');
-          this.isLoading = false;
+          if (response.body.status === 201) {
+            this.router.navigateByUrl('/login');
+            this.isLoading = false;
+          }
         })
         .catch((error) => {
           if (error.status === 409) {
@@ -81,11 +83,6 @@ export class SignupComponent extends AppComponent implements OnInit {
       console.error(error);
       throw error;
     }
-  }
-
-  encryptPassword(): string {
-    const password = this.registerForm.get('password')?.value;
-    return CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
   }
 
   toggleConfirmPassword(): void {

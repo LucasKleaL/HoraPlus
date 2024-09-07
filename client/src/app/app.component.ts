@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { FormGroup } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-root',
@@ -16,5 +18,10 @@ export class AppComponent {
       duration: 20000,
       panelClass: [className],
     });
+  }
+
+  encryptPassword(form: FormGroup): string {
+    const password = form.get('password')?.value;
+    return CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
   }
 }

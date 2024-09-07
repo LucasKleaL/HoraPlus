@@ -1,13 +1,15 @@
 <div class="loading-spinner" *ngIf="isLoading">
     <mat-spinner [diameter]="85"></mat-spinner>
 </div>
-<div>
-    <div class="row" style="justify-content: center;">
-        <div class="col-md-6 col-lg-6 mb-12 text-center">
-            <div class="card border-0 rounded-0">
-                <div class="card-body">
-            <div class="card-body card-autentication">
-                <h3 class="card-title title-autentication">Crie a sua conta</h3>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="../../../assets/horaplus-square-logo.png"
+                    class="img-fluid" style="border-radius: 1rem;" width="80%" height="80%" alt="HoraPlus visual identity">
+            </div>
+            <div class="m-0 col-md-4 col-lg-4 col-xl-4 offset-xl-1">
+                <h4 class="card-title title-autentication mb-4">Crie sua conta no HoraPlus!</h4>
                 <form [formGroup]="registerForm" #formDir="ngForm" (ngSubmit)="formDir.valid && signUp()">
                     <div class="mb-3 input-group">
                         <div class="input-group-text">
@@ -56,7 +58,7 @@
                         <p>A confirmação não bate com a senha*</p>
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-primary btn-autentication" style="width: 100%; border-radius: 30.4px; margin-top: 32px">
+                        <button type="submit" class="btn btn-primary btn-autentication">
                             Cadastrar
                         </button>
                     </div>
@@ -70,4 +72,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

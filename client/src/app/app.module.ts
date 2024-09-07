@@ -19,11 +19,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatMenuModule } from '@angular/material/menu';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

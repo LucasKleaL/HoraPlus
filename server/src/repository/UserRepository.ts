@@ -17,9 +17,9 @@ class UserRepository extends AppRepository {
                 await db.collection("Users").doc(userRecord.uid).set({
                     email: user.email,
                     name: user.name,
-                    system_role: user.system_role,
-                    role: user.role,
-                    department: user.department,
+                    system_role: user.system_role ?? 'user',
+                    role: user.role ?? 'user',
+                    department: user.department ?? '',
                     created: created,
                     modified: null,
                     deleted: null,
