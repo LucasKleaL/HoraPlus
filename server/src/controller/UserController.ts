@@ -71,8 +71,8 @@ class UserController {
         } catch (error) {
             if (error instanceof Error) {
                 console.error('Error to login user:', error.message);
-                if (error.message.includes('auth/wrong-password')) {
-                    res.status(401).json({ statusCode: 401, error: 'auth/wrong-password', message: error.message });
+                if (error.message.includes('auth/invalid-credential')) {
+                    res.status(401).json({ statusCode: 401, error: 'auth/invalid-credential', message: error.message });
                 }
                 else if (error.message.includes('temporarily disabled')) {
                     res.status(403).json({ statusCode: 403, error: 'auth/access-disabled', message: error.message });

@@ -20,6 +20,7 @@ export class LoginComponent extends AppComponent implements OnInit {
   showPassword:boolean = false;
   wrongCredentials: boolean = false;
   isLoading: boolean = false;
+  wrongCredentialsLabel:string = 'E-mail ou senha inválidos.';
 
   constructor(
     _snackBar: MatSnackBar,
@@ -49,13 +50,19 @@ export class LoginComponent extends AppComponent implements OnInit {
           const customToken = response.body.customToken;
           if (customToken) { 
             this.cookieService.set('token', customToken, undefined, '/', undefined, true, 'Strict');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/extrahours']);
             this.wrongCredentials = false;
           } else {
             this.wrongCredentials = true;
           }
         })
         .catch((error) => {
+          if (error.status === 403) {
+            this.wrongCredentialsLabel = 'Acesso temporariamente desabilitado.';
+          }
+          if (error.status === 500) {
+            this.wrongCredentialsLabel = 'Houve um erro ao realizar o login. Por favor tente novamente.'
+          }
           this.wrongCredentials = true;
           this.userAuth.clearUser();
           this.isLoading = false;

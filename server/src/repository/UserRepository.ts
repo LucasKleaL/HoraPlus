@@ -175,7 +175,8 @@ class UserRepository extends AppRepository {
                 return `User with uid ${uid} does not exist or has no data`;
             } else {
                 const customClaims = {
-                    uid: userData.id,
+                    uid: uid,
+                    name: userData.name,
                     system_role: userData.system_role,
                     role: userData.role,
                     department: userData.department,
