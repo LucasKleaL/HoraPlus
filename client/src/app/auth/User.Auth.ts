@@ -19,7 +19,7 @@ export class UserAuth {
     let token = this.getTokenFromCookie();
     if (token) {
       let decodedToken = this.decodeToken(token);
-      let user = decodedToken.claims.userAuth;
+      let user = decodedToken.claims;
       user.infos = decodedToken.claims;
       this.setUser(user);
     }
