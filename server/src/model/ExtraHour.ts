@@ -3,9 +3,16 @@ type ExtraHour = {
     user_uid: string,
     title: string,
     description?: string,
-    date: Date,
+    date: string,
     amount: Float32Array,
-    employee_uid: string,
+    employee: {
+        uid: string,
+        name: string,
+    },
+    department: {
+        uid: string,
+        description: string,
+    }
 }
 
 export default ExtraHour;
