@@ -11,6 +11,7 @@ class ExtraHourRepository extends AppRepository {
             let result;
             const newExtraHour = {
                 ...extraHour,
+                date: this.formatDateTime(new Date(Date.parse(extraHour.date))),
                 created: this.getDateTime(),
                 modified: null,
                 deleted: null,
@@ -64,7 +65,7 @@ class ExtraHourRepository extends AppRepository {
         try {
             const querySnapshot = await db
                 .collection("ExtraHours")
-                .where("user_uid.id", "==", userUid)
+                .where("user_uid", "==", userUid)
                 .where("deleted", "==", null)
                 .get();
 

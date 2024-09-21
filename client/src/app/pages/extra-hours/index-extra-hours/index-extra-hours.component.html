@@ -1,0 +1,35 @@
+<div class="loading-spinner" style="position: relative;" *ngIf="isLoading">
+    <mat-spinner [diameter]="85"></mat-spinner>
+</div>
+<div>
+    <h4 class="mb-4 text-muted">Horas Extras</h4>
+    <div class="row">
+        <div class="add-button-container">
+            <button class="btn btn-primary add-button" routerLink="/extrahours/add"><i class="bi bi-plus"></i>Novo</button>
+        </div>
+        <div class="card-body" *ngIf="!isLoading">
+            <div class="row col-md-12" style="padding: 40px">
+                <app-card-extra-hour 
+                    [extraHours]="extraHours" 
+                    [totalExtraHours]="totalExtraHours"
+                    [currentPage]="currentPage" 
+                    [pageSize]="pageSize" 
+                    [isLoading]="isLoading"
+                    [showActions]="showActions" 
+                    [editExtraHourHandler]="editExtraHourHandler"
+                    [deleteExtraHourHandler]="deleteExtraHourHandler">
+                </app-card-extra-hour>
+                <div *ngIf="!isLoading && extraHours.length === 0" class="no-extrahours-message">
+                    Nenhuma hora extra encontrada.
+                </div>
+                <mat-paginator 
+                    id="mat-paginator-bottom" 
+                    [length]="totalExtraHours" 
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25, 50]" 
+                    [pageIndex]="currentPage - 1" (page)="onPageChange($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>

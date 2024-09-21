@@ -9,7 +9,8 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'HoraPlus';
+  //title = 'HoraPlus';
+  activeRoute: string = '';
 
   constructor(public _snackBar: MatSnackBar) {}
 
@@ -23,5 +24,9 @@ export class AppComponent {
   encryptPassword(form: FormGroup): string {
     const password = form.get('password')?.value;
     return CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  }
+
+  changeActiveRoute(routeName: string): void {
+    this.activeRoute = routeName;
   }
 }

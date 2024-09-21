@@ -14,7 +14,8 @@ extraHourRouter.post(
             description: Joi.optional(),
             date: Joi.date().required(),
             amount: Joi.number().required(),
-            employe_uid: Joi.string().required(),
+            employee: Joi.object().required(),
+            department: Joi.object().required(),
         })
     }), extraHourController.add as RequestHandler
 );
