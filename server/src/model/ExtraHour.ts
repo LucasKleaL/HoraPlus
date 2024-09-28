@@ -4,7 +4,7 @@ type ExtraHour = {
     title: string,
     description?: string,
     date: string,
-    amount: Float32Array,
+    amount: string,
     employee: {
         uid: string,
         name: string,
