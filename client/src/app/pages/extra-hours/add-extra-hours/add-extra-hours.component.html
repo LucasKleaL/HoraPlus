@@ -1,0 +1,129 @@
+<div class="loading-overlay" *ngIf="isLoading"></div>
+<div class="loading-spinner" *ngIf="isLoading">
+    <mat-spinner [diameter]="85"></mat-spinner>
+</div>
+<div>
+    <h4>Adicionar Hora Extra</h4>
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-lg-4 text-center form-card">
+            <form [formGroup]="extraHourForm" #formDir="ngForm" (submit)="formDir.valid && addExtraHour()">
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-chat-square-text"></span>
+                        </div>
+                        <input 
+                            [formControl]="title"
+                            [ngClass]="{ 'is-invalid': title.invalid && formDir.submitted }" 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Título"
+                            id="title"
+                        >
+                    </div>
+                    <div class="row validation-error" *ngIf="title.invalid && formDir.submitted">
+                        <p>O título é obrigatório.*</p>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-card-text"></span>
+                        </div>
+                        <input 
+                            [formControl]="description"
+                            [ngClass]="{ 'is-invalid': description.invalid && formDir.submitted }"
+                            type="text"
+                            class="form-control" 
+                            placeholder="Descrição"
+                            id="description"
+                        >
+                    </div>
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-person"></span>
+                        </div>
+                        <input 
+                            [formControl]="employee"
+                            [ngClass]="{ 'is-invalid': employee.invalid && formDir.submitted }"
+                            type="text"
+                            class="form-control"
+                            placeholder="Funcionário"
+                            id="employee"
+                        >
+                    </div>
+                    <div class="row validation-error" *ngIf="employee.invalid && formDir.submitted">
+                        <p>O funcionário é obrigatório*</p>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-file-text"></span>
+                        </div>
+                        <input 
+                            [formControl]="department"
+                            [ngClass]="{ 'is-invalid': department.invalid && formDir.submitted }"
+                            type="text"
+                            class="form-control"
+                            placeholder="Setor"
+                            id="department"
+                        >
+                    </div>
+                    <div class="row validation-error" *ngIf="department.invalid && formDir.submitted">
+                        <p>O setor é obrigatório*</p>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-calendar3"></span>
+                        </div>
+                        <input 
+                            [formControl]="date"
+                            [ngClass]="{ 'is-invalid': date.invalid && formDir.submitted }"
+                            type="datetime-local"
+                            class="form-control"
+                            placeholder="Data"
+                            id="date"
+                            (focus)="isDateFocused = true"
+                            (blur)="isDateFocused = false"
+                        >
+                    </div>
+                    <div class="row input-helper-text" *ngIf="isDateFocused">
+                        <p>Insira a data e o horário de início da hora extra.</p>
+                    </div>
+                    <div class="row validation-error" *ngIf="date.invalid && formDir.submitted">
+                        <p>A data é obrigatória*</p>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-alarm"></span>
+                        </div>
+                        <input 
+                            [formControl]="amountHours"
+                            [ngClass]="{ 'is-invalid': amountHours.invalid && formDir.submitted }"
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Data"
+                            id="amountHours" 
+                            mask="00:00" 
+                            [clearIfNotMatch]="true"
+                            [dropSpecialCharacters]="false"
+                            (focus)="isAmountHoursFocused = true"
+                            (blur)="isAmountHoursFocused = false"
+                        >
+                    </div>
+                    <div class="row input-helper-text" *ngIf="isAmountHoursFocused">
+                        <p>Insira a quantidade de horas extras no formato HH:MM.</p>
+                    </div>
+                    <div class="row validation-error" *ngIf="amountHours.invalid && formDir.submitted">
+                        <p>{{ amountHoursErrorLabel }}</p>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="btn btn-primary btn-rounded">
+                            Adicionar
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>

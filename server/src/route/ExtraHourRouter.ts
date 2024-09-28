@@ -13,7 +13,7 @@ extraHourRouter.post(
             title: Joi.string().required(),
             description: Joi.optional(),
             date: Joi.date().required(),
-            amount: Joi.number().required(),
+            amount: Joi.string().required(),
             employee: Joi.object().required(),
             department: Joi.object().required(),
         })

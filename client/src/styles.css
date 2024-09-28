@@ -24,6 +24,8 @@
     --red-error: #DC3545;
     --green-price: #20EE20;
     --green-success: #1DE9B6;
+    --dark-primary: #212529;
+    --dark-secondary: #343A40;
 }
 
 body {
@@ -32,19 +34,12 @@ body {
     height: 100%;    
 }
 
-/*
-.form-control {
-    padding: 12px;
-    border: 1px solid rgba(29, 60, 80, 0.6);
-}
-*/
-
 .snackbar-success {
-    background: var(--green-success) !important;
+    background-color: var(--green-success) !important;
 }
 
 .snackbar-error {
-    background: var(--red-error);
+    background-color: var(--red-error) !important;
 }
 
 .loading-spinner {
@@ -61,32 +56,24 @@ body {
     }
 }
 
-/*
-.input-group-text {
-    background-color: var(--material-blue);
-    color: var(--gray-line);
-    opacity: 1 !important;
-    border: 1px solid --horaplus-dark-blue;
-}
-*/
-
-.btn-autentication {
+.btn-rounded {
     width: 100%; 
     border-radius: 1.8rem;
 }
 
-/*
-.btn-autentication:hover {
-    background-color: var(--dark-blue);
-    color: var(--gray-blue);
-    border: var(--horaplus-blue);
-    opacity: 1;
-}
-*/
-
 .validation-error {
     color: var(--red-error);
-    margin-top: -0.9rem;
+    margin-top: -0.8rem;
+    margin-bottom: 0;
     text-align: left;
     padding-left: 2.6rem;
+    font-size: 0.9rem;
+}
+
+.input-helper-text {
+    margin-top: -0.8rem;
+    margin-bottom: 0;
+    text-align: left;
+    padding-left: 2.6rem;
+    font-size: 0.9rem;
 }

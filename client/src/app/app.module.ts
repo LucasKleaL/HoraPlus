@@ -25,7 +25,9 @@ import { UserService } from './services/user.service';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CardExtraHourComponent } from './components/card-extra-hour/card-extra-hour.component';
 import { CommonModule, DatePipe } from '@angular/common';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ExtraHourService } from './services/extra-hour.service';
+import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-extra-hours.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ExtraHourService } from './services/extra-hour.service';
     LoginComponent,
     IndexExtraHoursComponent,
     CardExtraHourComponent,
+    AddExtraHoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,10 +59,13 @@ import { ExtraHourService } from './services/extra-hour.service';
     BsDropdownModule,
     MatMenuModule,
     CommonModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
     DatePipe,
+    provideNgxMask(),
     UserService,
     ExtraHourService,
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntl }

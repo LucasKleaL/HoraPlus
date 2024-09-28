@@ -3,7 +3,7 @@ export class ExtraHour {
         public user_uid: string,
         public title: string,
         public date: Date,
-        public amount: number,
+        public amount: string,
         public employee: {
             uid: string,
             name: string,
