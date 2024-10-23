@@ -77,3 +77,8 @@ body {
     padding-left: 2.6rem;
     font-size: 0.9rem;
 }
+
+.back-button {
+    margin-top: 0.5rem;
+    color: var(--white);
+}

@@ -28,8 +28,8 @@ export class SignupComponent extends AppComponent implements OnInit {
   isLoading:boolean = false;
   submitted:boolean = false;
 
-  constructor(_snackBar: MatSnackBar, private userService: UserService, private router: Router) {
-    super(_snackBar);
+  constructor(_snackBar: MatSnackBar, router: Router, private userService: UserService) {
+    super(_snackBar, router);
   }
 
   ngOnInit(): void {
