@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormGroup } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,9 +10,10 @@ import * as CryptoJS from 'crypto-js';
 })
 export class AppComponent {
   //title = 'HoraPlus';
-  activeRoute: string = '';
-
-  constructor(public _snackBar: MatSnackBar) {}
+  activeRoute: string = 'extrahours';
+  isNavbarCollapsed: boolean = true;
+  
+  constructor(public _snackBar: MatSnackBar, public router: Router) {}
 
   openSnackBar(message: string, action: string, className: string) {
     this._snackBar.open(message, action, {
@@ -28,5 +29,6 @@ export class AppComponent {
 
   changeActiveRoute(routeName: string): void {
     this.activeRoute = routeName;
+    this.router.navigate([routeName]);
   }
 }

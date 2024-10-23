@@ -23,8 +23,8 @@ export class IndexExtraHoursComponent extends AppComponent implements OnInit {
   pageSize: number = 10;
   isLoading: boolean = false;
   
-  constructor(_snackBar: MatSnackBar, private router: Router, private extraHoursService: ExtraHourService, private userAuth: UserAuth) {
-    super(_snackBar);
+  constructor(_snackBar: MatSnackBar, router: Router, private extraHoursService: ExtraHourService, private userAuth: UserAuth) {
+    super(_snackBar, router);
   }
 
   ngOnInit(): void {

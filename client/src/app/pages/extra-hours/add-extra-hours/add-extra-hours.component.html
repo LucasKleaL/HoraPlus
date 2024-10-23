@@ -3,7 +3,7 @@
     <mat-spinner [diameter]="85"></mat-spinner>
 </div>
 <div>
-    <h4>Adicionar Hora Extra</h4>
+    <app-breadcrumb></app-breadcrumb>
     <div class="row justify-content-center">
         <div class="col-md-4 col-lg-4 text-center form-card">
             <form [formGroup]="extraHourForm" #formDir="ngForm" (submit)="formDir.valid && addExtraHour()">
@@ -121,6 +121,9 @@
                     <div class="pt-4">
                         <button type="submit" class="btn btn-primary btn-rounded">
                             Adicionar
+                        </button>
+                        <button class="btn btn-outline-secondary btn-rounded back-button" (click)="changeActiveRoute('extrahours')">
+                            Voltar
                         </button>
                     </div>
             </form>

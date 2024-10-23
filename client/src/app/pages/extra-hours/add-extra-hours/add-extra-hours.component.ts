@@ -28,12 +28,12 @@ export class AddExtraHoursComponent extends AppComponent implements OnInit {
   
   constructor(
     _snackBar: MatSnackBar,
+    router: Router,
     private extraHourService: ExtraHourService, 
     private userAuth: UserAuth, 
-    private router: Router,
     private datePipe: DatePipe
   ) {
-    super(_snackBar);
+    super(_snackBar, router);
   }
 
   ngOnInit(): void {

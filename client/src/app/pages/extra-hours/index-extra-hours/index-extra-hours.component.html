@@ -2,10 +2,10 @@
     <mat-spinner [diameter]="85"></mat-spinner>
 </div>
 <div>
-    <h4 class="mb-4 text-muted">Horas Extras</h4>
     <div class="row">
+        <app-breadcrumb></app-breadcrumb>
         <div class="add-button-container">
-            <button class="btn btn-primary add-button" routerLink="/extrahours/add"><i class="bi bi-plus"></i>Novo</button>
+            <button class="btn btn-primary add-button" (click)="changeActiveRoute('extrahours/add')"><i class="bi bi-plus"></i>Novo</button>
         </div>
         <div class="card-body" *ngIf="!isLoading">
             <div class="row col-md-12" style="padding: 40px">

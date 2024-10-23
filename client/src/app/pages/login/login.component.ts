@@ -24,12 +24,12 @@ export class LoginComponent extends AppComponent implements OnInit {
 
   constructor(
     _snackBar: MatSnackBar,
+    router: Router,
     private userService: UserService,
     private userAuth: UserAuth,
-    private router: Router,
     private cookieService: CookieService
   ) {
-    super(_snackBar);
+    super(_snackBar, router);
   }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class LoginComponent extends AppComponent implements OnInit {
           const customToken = response.body.customToken;
           if (customToken) { 
             this.cookieService.set('token', customToken, undefined, '/', undefined, true, 'Strict');
-            this.router.navigate(['/extrahours']);
+            this.changeActiveRoute('extrahours');
             this.wrongCredentials = false;
           } else {
             this.wrongCredentials = true;

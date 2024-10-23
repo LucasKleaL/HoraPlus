@@ -28,6 +28,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ExtraHourService } from './services/extra-hour.service';
 import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-extra-hours.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-
     IndexExtraHoursComponent,
     CardExtraHourComponent,
     AddExtraHoursComponent,
+    NavbarComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,14 +66,16 @@ import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-
     CommonModule,
     CollapseModule.forRoot(),
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    NgbModule
   ],
   providers: [
     DatePipe,
     provideNgxMask(),
     UserService,
     ExtraHourService,
-    { provide: MatPaginatorIntl, useClass: MatPaginatorIntl }
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntl },
+    NgbModule,
   ],
   bootstrap: [AppComponent]
 })
