@@ -5,6 +5,8 @@ import { AuthGuard } from './auth/Auth.Guard';
 import { LoginComponent } from './pages/login/login.component';
 import { IndexExtraHoursComponent } from './pages/extra-hours/index-extra-hours/index-extra-hours.component';
 import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-extra-hours.component';
+import { IndexEmployeesComponent } from './pages/employees/index-employees/index-employees.component';
+import { AddEmployeesComponent } from './pages/employees/add-employees/add-employees.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,8 @@ const routes: Routes = [
   },
   { path: 'extrahours', component: IndexExtraHoursComponent, canActivate: [AuthGuard] },
   { path: 'extrahours/add', component: AddExtraHoursComponent, canActivate: [AuthGuard] },
+  { path: 'employees', component: IndexEmployeesComponent, canActivate: [AuthGuard] },
+  { path: 'employees/add', component: AddEmployeesComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

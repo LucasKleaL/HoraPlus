@@ -82,3 +82,22 @@ body {
     margin-top: 0.5rem;
     color: var(--white);
 }
+
+.add-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 4rem;
+}
+
+.add-button {
+    width: 6rem;
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button i {
+    margin-right: 0.05rem;
+}

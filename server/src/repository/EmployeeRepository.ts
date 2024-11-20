@@ -69,9 +69,8 @@ class EmployeeRepository extends AppRepository
             const querySnapshot = await db
                 .collection("Employees")
                 .where("user_uid", "==", userUid)
-                //.where("deleted", "==", null)
+                .where("deleted", "==", null)
                 .get();
-            console.log('size ', querySnapshot.size);
 
             return querySnapshot.size;
         } catch (error) {
@@ -80,8 +79,7 @@ class EmployeeRepository extends AppRepository
         }
     }
 
-    async getNextPageByUser(userUid: string, limit: number, lastDocument?: admin.firestore.QueryDocumentSnapshot): Promise<admin.firestore.QuerySnapshot>
-    {
+    async getNextPageByUser(userUid: string, limit: number, lastDocument?: admin.firestore.QueryDocumentSnapshot): Promise<any> {
         try {
             let query = db
                 .collection("Employees")
@@ -89,14 +87,21 @@ class EmployeeRepository extends AppRepository
                 .where("deleted", "==", null)
                 .orderBy("created")
                 .limit(limit);
-            console.log(userUid);
             if (lastDocument) {
                 query = query.startAfter(lastDocument);
             }
             const snapshot = await query.get();
-            console.log('size ', snapshot);
-
-            return snapshot;
+    
+            const employeesWithExtraHours = await Promise.all(snapshot.docs.map(async (doc) => {
+                const employeeData = doc.data();
+                const extraHoursSnapshot = await db.collection("ExtraHours")
+                    .where("employee.uid", "==", doc.id)
+                    .get();
+                const extraHours = extraHoursSnapshot.docs.map(extraHourDoc => extraHourDoc.data());
+                return { ...employeeData, uid: doc.id, extraHours };
+            }));
+    
+            return { employees: employeesWithExtraHours, lastDocument: snapshot.docs[snapshot.docs.length - 1] };
         } catch (error) {
             console.error("Error on Employee getNextPageByUser: ", error);
             throw error;
