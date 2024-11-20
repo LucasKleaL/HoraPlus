@@ -1,0 +1,45 @@
+<div class="loading-spinner" style="position: relative;" *ngIf="isLoading">
+    <mat-spinner [diameter]="85"></mat-spinner>
+</div>
+<div>
+    <div class="row">
+        <app-breadcrumb></app-breadcrumb>
+        <div class="add-button-container">
+            <button class="btn btn-primary add-button" (click)="changeActiveRoute('employees/add')"><i class="bi bi-plus"></i>Novo</button>
+        </div>
+        <div class="card-body" *ngIf="!isLoading">
+            <div class="row col-md-12" style="padding: 40px">
+                <app-card
+                    [items]="employees" 
+                    [totalItems]="totalEmployees"
+                    [currentPage]="currentPage" 
+                    [pageSize]="pageSize" 
+                    [isLoading]="isLoading"
+                    [showActions]="showActions"
+                    [cardTitle]="'Funcionário'"
+                    [titleProperty]="'name'"
+                    [titleLabel]="'Nome'"
+                    [descriptionProperty]="'extrahours'"
+                    [descriptionLabel]="'Descrição'"
+                    [tag1Property]="'department'"
+                    [tag1Label]="'Setor'"
+                    [tag2Property]="'role'"
+                    [tag2Label]="'Cargo'"
+                    [editItemHandler]="editEmployeeHandler"
+                    [deleteItemHandler]="deleteEmployeeHandler">
+                </app-card>
+                <div *ngIf="!isLoading && employees.length === 0" class="no-extrahours-message">
+                    Nenhuma hora extra encontrada.
+                </div>
+                <mat-paginator 
+                    id="mat-paginator-bottom" 
+                    [length]="totalEmployees" 
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25, 50]" 
+                    [pageIndex]="currentPage - 1" (page)="onPageChange($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

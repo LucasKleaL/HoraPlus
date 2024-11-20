@@ -1,0 +1,112 @@
+.extrahour-card {
+  width: 300px;
+  border: 1px solid var(--gray-line);
+}
+
+.extrahour-card:hover {
+  border: 1px solid var(--horaplus-blue);
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 15px;
+}
+
+.btn-view:hover {
+  color: var(--horaplus-blue);
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid #e6e4e9;
+  border-radius: 8px;
+  border: 0;
+  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
+.card .card-header {
+  background: none;
+  padding: 0 0.9375rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+}
+
+.card-widget {
+  padding: 0 0.5rem;
+}
+
+.card-header:first-child {
+  border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+}
+
+.card-text-info {
+  font-size: 1rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
+}
+
+.card-widget-title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.card-widget-date-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--gray-line);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.card-widget-date-day {
+  color: var(--interaction-blue);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.card-widget-date-month {
+  color: var(--interaction-blue);
+  line-height: 1;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.card-widget-meeting-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.card-widget-meeting-time {
+  color: var(--gray-text);
+  font-size: 0.8rem;
+}
+
+.btn-view {
+  padding-top: 1rem;
+  padding-left: 0;
+  font-size: 1rem;
+}
+
+b {
+  font-weight: 500;
+}
+  

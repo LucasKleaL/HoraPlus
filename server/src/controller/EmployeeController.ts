@@ -68,9 +68,9 @@ class EmployeeController
                 limit,
                 lastDocument,
             );
-            const employees = currentPageSnapshot.docs.map((doc) => {
-                const data = doc.data();
-                return { ...data, uid: doc.id };
+            const employees = currentPageSnapshot.employees.map((doc: any) => {
+                const data = doc;
+                return { ...data, uid: data.uid };
             });
 
             res.status(200).json({ employees, total: totalEmployeesSnapshot, currentPage: page })

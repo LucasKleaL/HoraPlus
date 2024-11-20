@@ -31,6 +31,9 @@ import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { IndexEmployeesComponent } from './pages/employees/index-employees/index-employees.component';
+import { CardComponent } from './components/card/card.component';
+import { AddEmployeesComponent } from './pages/employees/add-employees/add-employees.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     AddExtraHoursComponent,
     NavbarComponent,
     BreadcrumbComponent,
+    IndexEmployeesComponent,
+    CardComponent,
+    AddEmployeesComponent,
   ],
   imports: [
     BrowserModule,

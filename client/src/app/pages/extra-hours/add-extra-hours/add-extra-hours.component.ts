@@ -74,7 +74,7 @@ export class AddExtraHoursComponent extends AppComponent implements OnInit {
         .then((response) => {
           this.openSnackBar('Hora extra adicionada com sucesso!', 'Ok', 'success-snackbar');
           this.isLoading = false;
-          this.router.navigate(['/extrahours']);
+          this.changeActiveRoute('/extrahours');
         }).catch((error) => {
           console.error(error);
           this.isLoading = false;
