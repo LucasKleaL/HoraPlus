@@ -2,14 +2,17 @@ import { db } from "../util/admin";
 import Employee from "../model/Employee";
 import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
+import DepartmentRepository from "./DepartmentRepository";
 import RoleRepository from "./RoleRepository";
 
 class EmployeeRepository extends AppRepository 
 {
+    departmentRepository!: DepartmentRepository;
     roleRepository!: RoleRepository;
-
+    
     constructor() {
         super();
+        this.departmentRepository = new DepartmentRepository();
         this.roleRepository = new RoleRepository();
     }
     
@@ -23,30 +26,10 @@ class EmployeeRepository extends AppRepository
                 modified: null,
                 deleted: null,
             };
-
-            if (typeof newEmployee.role === 'string') {
-                try {
-                    const newRole = {
-                        title: newEmployee.role,
-                        user_uid: newEmployee.user_uid,
-                    }
-                    const newRoleDoc = await this.roleRepository.add(newRole);
-                    if (newRoleDoc) {
-                        newEmployee.role = {
-                            uid: newRoleDoc.uid,
-                            title: newRoleDoc.title
-                        }
-                    }
-                } catch(error) {
-                    console.error("Error on Employee add: ", error);
-                    throw error;
-                }
-            } else {
-                newEmployee.role = {
-                    uid: newEmployee.role.uid,
-                    title: newEmployee.role.title
-                }
-            }
+            const newDepartment = await this.addDepartment(newEmployee.department, newEmployee.user_uid);
+            const newRole = await this.addRole(newEmployee.role, newEmployee.user_uid);
+            newEmployee.department = newDepartment;
+            newEmployee.role = newRole;
 
             await db.collection("Employees").add(newEmployee)
                 .then(async (docRef) => {
@@ -63,6 +46,72 @@ class EmployeeRepository extends AppRepository
             return result;
         } catch (error) {
             console.error("Error on Employee add: ", error);
+            throw error;
+        }
+    }
+
+    async addDepartment(department: any, userUid: string): Promise<{ uid: string, title: string }> {
+        try {
+            if (typeof department === 'string') {
+                try {
+                    const newDepartment = {
+                        title: department,
+                        user_uid: userUid,
+                    }
+                    const newDepartmentDoc = await this.departmentRepository.add(newDepartment);
+                    if (newDepartmentDoc) {
+                        department = {
+                            uid: newDepartmentDoc.uid,
+                            title: newDepartmentDoc.title
+                        }
+                    }
+                } catch(error) {
+                    console.error("Error on Employee add: ", error);
+                    throw error;
+                }
+            } else {
+                department = {
+                    uid: department.uid,
+                    title: department.title
+                }
+            }
+
+            return department;
+        } catch (error) {
+            console.error("Error on Employee addDepartment: ", error);
+            throw error;
+        }
+    }
+
+    async addRole(role: any, userUid: string): Promise<{ uid: string, title: string }> {
+        try {
+            if (typeof role === 'string') {
+                try {
+                    const newRole = {
+                        title: role,
+                        user_uid: userUid,
+                    }
+                    const newRoleDoc = await this.roleRepository.add(newRole);
+                    if (newRoleDoc) {
+                        role = {
+                            uid: newRoleDoc.uid,
+                            title: newRoleDoc.title
+                        }
+                    }
+                } catch(error) {
+                    console.error("Error on Employee add: ", error);
+                    throw error;
+                }
+            } else {
+                role = {
+                    uid: role.uid,
+                    title: role.title
+                }
+            }
+
+            return role;
+        } catch (error) {
+            console.error("Error on Employee addRole: ", error);
             throw error;
         }
     }

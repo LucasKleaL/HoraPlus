@@ -24,6 +24,7 @@
                         <p>O nome é obrigatório.*</p>
                     </div>
 
+                    <!--
                     <div class="mb-3 input-group">
                         <div class="input-group-text">
                             <span class="bi bi-file-text"></span>
@@ -37,6 +38,8 @@
                             id="department"
                         >
                     </div>
+                    -->
+                    <app-input-autocomplete [options]="departments" [placeholder]="'Setor'" [inputControl]="departmentControl"></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="department.invalid && formDir.submitted">
                         <p>O setor é obrigatório*</p>
                     </div>
@@ -50,7 +53,7 @@
                         <button type="submit" class="btn btn-primary btn-rounded">
                             Adicionar
                         </button>
-                        <button class="btn btn-outline-secondary btn-rounded back-button" (click)="changeActiveRoute('extrahours')">
+                        <button class="btn btn-outline-secondary btn-rounded back-button" (click)="changeActiveRoute('employees')">
                             Voltar
                         </button>
                     </div>
