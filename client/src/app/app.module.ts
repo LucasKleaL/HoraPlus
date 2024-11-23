@@ -34,6 +34,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { IndexEmployeesComponent } from './pages/employees/index-employees/index-employees.component';
 import { CardComponent } from './components/card/card.component';
 import { AddEmployeesComponent } from './pages/employees/add-employees/add-employees.component';
+import { InputAutocompleteComponent } from './components/input-autocomplete/input-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AddEmployeesComponent } from './pages/employees/add-employees/add-emplo
     IndexEmployeesComponent,
     CardComponent,
     AddEmployeesComponent,
+    InputAutocompleteComponent,
   ],
   imports: [
     BrowserModule,

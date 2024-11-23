@@ -1,0 +1,21 @@
+
+
+<div class="mb-3 input-group">
+    <div class="input-group-text">
+        <span class="bi bi-file-text"></span>
+    </div>
+    <input 
+        [formControl]="inputControl" 
+        type="text"
+        class="form-control" 
+        placeholder={{placeholder}}
+        id="inputAutocomplete {{placeholder}}" 
+        matInput 
+        [matAutocomplete]="roleAutocomple"
+    >
+    <mat-autocomplete #roleAutocomple="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option.title }}
+        </mat-option>
+    </mat-autocomplete>
+</div>

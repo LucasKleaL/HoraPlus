@@ -5,8 +5,14 @@ type User = {
     email: string,
     password: string,
     system_role: string,
-    role: Array<string>,
-    department: Array<string>,
+    role: {
+        uid: string,
+        description: string,
+    },
+    department: {
+        uid: string,
+        description: string,
+    },
 };
 
 export default User;

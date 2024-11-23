@@ -2,9 +2,17 @@ import { db } from "../util/admin";
 import Employee from "../model/Employee";
 import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
+import RoleRepository from "./RoleRepository";
 
 class EmployeeRepository extends AppRepository 
 {
+    roleRepository!: RoleRepository;
+
+    constructor() {
+        super();
+        this.roleRepository = new RoleRepository();
+    }
+    
     async add(employee: Employee): Promise<any>
     {
         try {
@@ -16,6 +24,30 @@ class EmployeeRepository extends AppRepository
                 deleted: null,
             };
 
+            if (typeof newEmployee.role === 'string') {
+                try {
+                    const newRole = {
+                        title: newEmployee.role,
+                        user_uid: newEmployee.user_uid,
+                    }
+                    const newRoleDoc = await this.roleRepository.add(newRole);
+                    if (newRoleDoc) {
+                        newEmployee.role = {
+                            uid: newRoleDoc.uid,
+                            title: newRoleDoc.title
+                        }
+                    }
+                } catch(error) {
+                    console.error("Error on Employee add: ", error);
+                    throw error;
+                }
+            } else {
+                newEmployee.role = {
+                    uid: newEmployee.role.uid,
+                    title: newEmployee.role.title
+                }
+            }
+
             await db.collection("Employees").add(newEmployee)
                 .then(async (docRef) => {
                     result = {
@@ -26,7 +58,7 @@ class EmployeeRepository extends AppRepository
                 .catch((error) => {
                     console.error("Error on Employee add: ", error);
                     throw error;
-                })
+                });
 
             return result;
         } catch (error) {

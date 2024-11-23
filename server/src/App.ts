@@ -4,6 +4,7 @@ import { errors } from 'celebrate';
 import UserRouter from './route/UserRouter';
 import ExtraHourRouter from './route/ExtraHourRouter';
 import EmployeeRouter from './route/EmployeeRouter';
+import RolesRouter from './route/RolesRouter';
 
 class App {
 
@@ -31,7 +32,7 @@ class App {
         this.app.get('/', (req: Request, res: Response) => {
             res.send('Hora+ server is running! 🛠️');
         });
-        this.app.use('/api', UserRouter, ExtraHourRouter, EmployeeRouter);
+        this.app.use('/v1', UserRouter, ExtraHourRouter, EmployeeRouter, RolesRouter);
 
         // Handle undefined routes
         this.app.use('*', (req, res) => {

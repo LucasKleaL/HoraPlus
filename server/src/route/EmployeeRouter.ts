@@ -11,8 +11,8 @@ employeeRouter.post(
         body: Joi.object({
             user_uid: Joi.string().required(),
             name: Joi.string().required().max(30),
-            role: Joi.array().required(),
-            department: Joi.array().required(),
+            role: Joi.required(),
+            department: Joi.required(),
         })
     }), employeeController.add as RequestHandler
 );

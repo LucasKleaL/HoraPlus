@@ -10,7 +10,7 @@ import { EmployeeService } from 'src/app/services/employees.service';
 @Component({
   selector: 'app-index-employees',
   templateUrl: './index-employees.component.html',
-  styleUrls: ['./index-employees.component.css']
+  styleUrls: ['./index-employees.component.scss']
 })
 export class IndexEmployeesComponent extends AppComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
