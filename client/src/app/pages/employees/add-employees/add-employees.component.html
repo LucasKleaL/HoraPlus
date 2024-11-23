@@ -40,20 +40,8 @@
                     <div class="row validation-error" *ngIf="department.invalid && formDir.submitted">
                         <p>O setor é obrigatório*</p>
                     </div>
-
-                    <div class="mb-3 input-group">
-                        <div class="input-group-text">
-                            <span class="bi bi-file-text"></span>
-                        </div>
-                        <input 
-                            [formControl]="role"
-                            [ngClass]="{ 'is-invalid': role.invalid && formDir.submitted }"
-                            type="text"
-                            class="form-control"
-                            placeholder="Cargo"
-                            id="role"
-                        >
-                    </div>
+                    
+                    <app-input-autocomplete [options]="roles" [placeholder]="'Cargo'" [inputControl]="roleControl"></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="role.invalid && formDir.submitted">
                         <p>O cargo é obrigatório*</p>
                     </div>

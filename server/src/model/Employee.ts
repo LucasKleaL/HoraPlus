@@ -2,8 +2,14 @@ type Employee = {
     uid?: string,
     user_uid: string,
     name: string,
-    role: Array<string>,
-    department: Array<string>,
+    role: {
+        uid: string,
+        title: string,
+    },
+    department: {
+        uid: string,
+        title: string,
+    },
 }
 
 export default Employee;

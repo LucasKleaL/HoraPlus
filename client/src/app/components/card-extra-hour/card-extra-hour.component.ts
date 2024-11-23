@@ -8,7 +8,7 @@ import { ExtraHourService } from 'src/app/services/extra-hour.service';
 @Component({
   selector: 'app-card-extra-hour',
   templateUrl: './card-extra-hour.component.html',
-  styleUrls: ['./card-extra-hour.component.css']
+  styleUrls: ['./card-extra-hour.component.scss']
 })
 export class CardExtraHourComponent {
   @Input() extraHours: any[] = [];

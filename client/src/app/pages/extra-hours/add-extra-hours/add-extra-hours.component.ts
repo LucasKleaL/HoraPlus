@@ -11,7 +11,7 @@ import { ExtraHourService } from 'src/app/services/extra-hour.service';
 @Component({
   selector: 'app-add-extra-hours',
   templateUrl: './add-extra-hours.component.html',
-  styleUrls: ['./add-extra-hours.component.css']
+  styleUrls: ['./add-extra-hours.component.scss']
 })
 export class AddExtraHoursComponent extends AppComponent implements OnInit {
   isLoading: boolean = false;

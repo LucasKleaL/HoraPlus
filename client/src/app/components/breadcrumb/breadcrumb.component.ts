@@ -6,7 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.css']
+  styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent extends AppComponent implements OnInit {
 

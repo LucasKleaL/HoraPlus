@@ -10,7 +10,7 @@ import { ExtraHourService } from 'src/app/services/extra-hour.service';
 @Component({
   selector: 'app-index-extra-hours',
   templateUrl: './index-extra-hours.component.html',
-  styleUrls: ['./index-extra-hours.component.css']
+  styleUrls: ['./index-extra-hours.component.scss']
 })
 export class IndexExtraHoursComponent extends AppComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

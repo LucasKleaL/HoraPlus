@@ -3,7 +3,7 @@ type Role = {
     user_uid: string,
     title: string,
     description?: string,
-    employees: Array<string>,
+    employees?: Array<string>,
 }
 
 export default Role;
