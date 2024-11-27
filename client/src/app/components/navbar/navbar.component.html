@@ -16,19 +16,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isNavbarCollapsed" >
         <ul class="navbar-nav mr-auto" *ngIf="this.userAuth.currentUser">
             <li class="nav-item active">
-                <a [class]="'nav-link' + (activeRoute === 'extrahours' ? ' active' : '')" href="extrahours" (click)="changeActiveRoute('extrahours')">Horas Extras</a>
+                <a class="nav-link" [class.active]="activeRoute === 'extrahours'" href="extrahours" (click)="changeActiveRoute('extrahours')">Horas Extras</a>
             </li>
             <li class="nav-item">
-                <a [class]="'nav-link' + (activeRoute === 'daysoff' ? ' active' : '')" href="daysoff" (click)="changeActiveRoute('daysoff')">Folgas</a>
+                <a class="nav-link" [class.active]="activeRoute === 'daysoff'" href="daysoff" (click)="changeActiveRoute('daysoff')">Folgas</a>
             </li>
             <li class="nav-item">
-                <a [class]="'nav-link' + (activeRoute === 'justifications' ? ' active' : '')" href="justifications" (click)="changeActiveRoute('justifications')">Justificativas</a>
+                <a class="nav-link" [class.active]="activeRoute === 'justifications'" href="justifications" (click)="changeActiveRoute('justifications')">Justificativas</a>
             </li>
             <li class="nav-item">
-                <a [class]="'nav-link' + (activeRoute === 'employees' ? ' active' : '')" href="employees" (click)="changeActiveRoute('employees')">Funcionários</a>
+                <a class="nav-link" [class.active]="activeRoute === 'employees'" href="employees" (click)="changeActiveRoute('employees')">Funcionários</a>
             </li>
             <li class="nav-item">
-                <a [class]="'nav-link' + (activeRoute === 'departments' ? ' active' : '')" href="departments" (click)="changeActiveRoute('departments')">Setores</a>
+                <a class="nav-link" [class.active]="activeRoute === 'departments'" href="departments" (click)="changeActiveRoute('departments')">Setores</a>
             </li>
         </ul>
 

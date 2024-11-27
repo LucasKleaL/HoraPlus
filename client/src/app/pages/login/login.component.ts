@@ -19,7 +19,6 @@ export class LoginComponent extends AppComponent implements OnInit {
   passwordField!: HTMLInputElement;
   showPassword:boolean = false;
   wrongCredentials: boolean = false;
-  isLoading: boolean = false;
   wrongCredentialsLabel:string = 'E-mail ou senha inválidos.';
 
   constructor(

@@ -21,7 +21,6 @@ export class IndexExtraHoursComponent extends AppComponent implements OnInit {
   @Input() deleteExtraHourHandler: ((extraHour: ExtraHour) => void) = () => {};
   currentPage: number = 1;
   pageSize: number = 10;
-  isLoading: boolean = false;
   
   constructor(_snackBar: MatSnackBar, router: Router, private extraHoursService: ExtraHourService, private userAuth: UserAuth) {
     super(_snackBar, router);

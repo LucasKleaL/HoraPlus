@@ -135,7 +135,6 @@ class UserRepository extends AppRepository {
         try {
             const auth = getAuth();
             let result;
-            console.log('repository' + user);
             if (accessToken) {
                 await firebaseAdmin.auth()
                     .verifyIdToken(accessToken)
@@ -152,7 +151,6 @@ class UserRepository extends AppRepository {
                     .then(async (userCredential) => {
                         const userAuth = userCredential.user;
                         result = await this.createCustomToken(userAuth.uid);
-                        console.log(result);
                     })
                     .catch((error) => {
                         console.error("Error on user login: ", error);

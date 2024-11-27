@@ -12,6 +12,7 @@ export class AppComponent {
   //title = 'HoraPlus';
   activeRoute: string = 'extrahours';
   isNavbarCollapsed: boolean = true;
+  isLoading: boolean = false;
   
   constructor(public _snackBar: MatSnackBar, public router: Router) {}
 

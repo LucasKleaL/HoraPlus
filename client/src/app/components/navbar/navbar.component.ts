@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { UserAuth } from 'src/app/auth/User.Auth';
 
@@ -17,7 +17,11 @@ export class NavbarComponent extends AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAuth.authUserFromToken();
-    console.log(this.userAuth.currentUser);
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.activeRoute = event.urlAfterRedirects.split('/')[1];
+      }
+    });
   }
 
   logout(): void {

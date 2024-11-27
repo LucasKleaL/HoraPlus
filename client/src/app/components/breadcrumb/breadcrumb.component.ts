@@ -31,7 +31,6 @@ export class BreadcrumbComponent extends AppComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
       this.generateBreadcrumbItems();
-      console.log(this.currentRoute);
     });
   }
 

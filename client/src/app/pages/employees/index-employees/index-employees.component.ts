@@ -21,7 +21,6 @@ export class IndexEmployeesComponent extends AppComponent implements OnInit {
   @Input() deleteEmployeeHandler: ((employee: Employee) => void) = () => {};
   currentPage: number = 1;
   pageSize: number = 10;
-  isLoading: boolean = false;
 
   constructor(_snackBar: MatSnackBar, router: Router, private employeesService: EmployeeService, private userAuth: UserAuth) {
     super(_snackBar, router);
