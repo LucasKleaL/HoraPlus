@@ -25,7 +25,6 @@ export class SignupComponent extends AppComponent implements OnInit {
   confirmPassword = new FormControl('', [Validators.required, this.passwordMatchValidator]);
   //role = new FormControl('', [Validators.required]);
   //department = new FormControl('', [Validators.required]);
-  isLoading:boolean = false;
   submitted:boolean = false;
 
   constructor(_snackBar: MatSnackBar, router: Router, private userService: UserService) {
@@ -44,7 +43,6 @@ export class SignupComponent extends AppComponent implements OnInit {
   }
 
   async signUp(): Promise<void> {
-    console.log('signup');
     try {
       this.isLoading = true;
       const encryptedPassword = this.encryptPassword(this.registerForm);

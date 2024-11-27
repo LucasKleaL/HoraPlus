@@ -1,8 +1,7 @@
-<div class="loading-overlay" *ngIf="isLoading"></div>
-<div class="loading-spinner" *ngIf="isLoading">
-    <mat-spinner [diameter]="85"></mat-spinner>
-</div>
 <div>
+    <div class="loading-spinner" *ngIf="isLoading">
+        <mat-spinner [diameter]="85"></mat-spinner>
+    </div>
     <app-breadcrumb></app-breadcrumb>
     <div class="row justify-content-center">
         <div class="col-md-4 col-lg-4 text-center form-card">
@@ -23,22 +22,7 @@
                     <div class="row validation-error" *ngIf="name.invalid && formDir.submitted">
                         <p>O nome é obrigatório.*</p>
                     </div>
-
-                    <!--
-                    <div class="mb-3 input-group">
-                        <div class="input-group-text">
-                            <span class="bi bi-file-text"></span>
-                        </div>
-                        <input 
-                            [formControl]="department"
-                            [ngClass]="{ 'is-invalid': department.invalid && formDir.submitted }"
-                            type="text"
-                            class="form-control"
-                            placeholder="Setor"
-                            id="department"
-                        >
-                    </div>
-                    -->
+                    
                     <app-input-autocomplete [options]="departments" [placeholder]="'Setor'" [inputControl]="departmentControl"></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="department.invalid && formDir.submitted">
                         <p>O setor é obrigatório*</p>

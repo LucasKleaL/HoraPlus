@@ -16,8 +16,6 @@ export class InputAutocompleteComponent implements OnInit {
   filteredOptions!: Observable<any[]>;
 
   ngOnInit() {
-    console.log(this.options);
-    console.log(this.placeholder);
     this.filteredOptions = this.inputControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || ''))

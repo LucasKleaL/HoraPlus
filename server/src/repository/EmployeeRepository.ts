@@ -146,7 +146,6 @@ class EmployeeRepository extends AppRepository
     async getTotalEmployeesByUser(userUid: string): Promise<number>
     {
         try {
-            console.log(userUid);
             const querySnapshot = await db
                 .collection("Employees")
                 .where("user_uid", "==", userUid)

@@ -14,7 +14,6 @@ import { ExtraHourService } from 'src/app/services/extra-hour.service';
   styleUrls: ['./add-extra-hours.component.scss']
 })
 export class AddExtraHoursComponent extends AppComponent implements OnInit {
-  isLoading: boolean = false;
   extraHourForm!: FormGroup;
   title = new FormControl('', [Validators.required]);
   description = new FormControl('', []);

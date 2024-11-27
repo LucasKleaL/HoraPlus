@@ -17,7 +17,6 @@ import { RolesService } from 'src/app/services/roles.service';
   styleUrls: ['./add-employees.component.scss']
 })
 export class AddEmployeesComponent extends AppComponent implements OnInit {
-  isLoading: boolean = false;
   employeeForm!: FormGroup;
   name = new FormControl('', [Validators.required]);
   department = new FormControl<string | Department>('', [Validators.required]);

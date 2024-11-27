@@ -14,7 +14,6 @@ export class EmployeeService {
 
     public async getEmployees(userUid: string): Promise<HttpResponse<any>> {
         try {
-            console.log(this.api + '/user/' + userUid);
             return await firstValueFrom(this.http.get<string>(this.api + '/user/' + userUid, { observe: 'response' }));
         } catch (error) {
             console.error(error);

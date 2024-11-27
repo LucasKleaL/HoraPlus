@@ -62,10 +62,10 @@ $HoraPlus-theme: mat.define-dark-theme((
     --dark-secondary: #343A40;
 }
 
-body {
-    font-family: Roboto;
-    margin: 0;
-    height: 100%;
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
 .snackbar-success {
@@ -135,5 +135,9 @@ body {
 .add-button i {
     margin-right: 0.05rem;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form-card {
+    background-color: var(--dark-secondary);
+    padding: 2rem;
+    border-radius: 2rem;
+}

@@ -14,7 +14,6 @@ export class ExtraHourService {
 
     public async getExtraHours(userUid: string): Promise<HttpResponse<any>> {
         try {
-            console.log(userUid);
             return await firstValueFrom(this.http.get<string>(this.api + '/user/' + userUid, { observe: 'response' }));
         } catch (error) {
             console.error(error);
