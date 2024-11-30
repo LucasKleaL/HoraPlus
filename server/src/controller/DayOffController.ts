@@ -106,7 +106,7 @@ export default class DayOffController
                 limit,
                 lastDocument,
             );
-            const daysOff = currentPageSnapshot.docs.map((doc: any) => {
+            const daysOff = currentPageSnapshot.daysOff.map((doc: any) => {
                 const data = doc;
                 return { ...data, uid: data.uid };
             });
