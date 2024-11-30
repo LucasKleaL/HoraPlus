@@ -5,27 +5,27 @@
     <div class="row">
         <app-breadcrumb></app-breadcrumb>
         <div class="add-button-container">
-            <button class="btn btn-primary add-button" (click)="changeActiveRoute('extrahours/add')"><i class="bi bi-plus"></i>Novo</button>
+            <button class="btn btn-primary add-button" (click)="changeActiveRoute('daysoff/add')"><i class="bi bi-plus"></i>Novo</button>
         </div>
         <div class="card-body" *ngIf="!isLoading">
             <div class="row col-md-12" style="padding: 40px">
                 <app-card-info-date 
-                    [items]="extraHours" 
-                    [totalItems]="totalExtraHours"
+                    [items]="daysOff" 
+                    [totalItems]="totalDaysOff"
                     [currentPage]="currentPage" 
                     [pageSize]="pageSize" 
                     [isLoading]="isLoading"
                     [showActions]="showActions"
-                    [itemModelName]="'extrahours'"
-                    [editItemHandler]="editExtraHourHandler"
-                    [deleteItemHandler]="deleteExtraHourHandler">
+                    [itemModelName]="'daysoff'"
+                    [editItemHandler]="editDayOffHandler"
+                    [deleteItemHandler]="deleteDayOffHandler">
                 </app-card-info-date>
-                <div *ngIf="!isLoading && extraHours.length === 0" class="no-items-message">
-                    Nenhuma hora extra encontrada.
+                <div *ngIf="!isLoading && daysOff.length === 0" class="no-items-message">
+                    Nenhuma folga encontrada.
                 </div>
                 <mat-paginator 
                     id="mat-paginator-bottom" 
-                    [length]="totalExtraHours" 
+                    [length]="totalDaysOff" 
                     [pageSize]="pageSize"
                     [pageSizeOptions]="[5, 10, 25, 50]" 
                     [pageIndex]="currentPage - 1" (page)="onPageChange($event)"

@@ -28,8 +28,8 @@
                     [editItemHandler]="editEmployeeHandler"
                     [deleteItemHandler]="deleteEmployeeHandler">
                 </app-card>
-                <div *ngIf="!isLoading && employees.length === 0" class="no-extrahours-message">
-                    Nenhuma hora extra encontrada.
+                <div *ngIf="!isLoading && employees.length === 0" class="no-items-message">
+                    Nenhum funcionário encontrado.
                 </div>
                 <mat-paginator 
                     id="mat-paginator-bottom" 

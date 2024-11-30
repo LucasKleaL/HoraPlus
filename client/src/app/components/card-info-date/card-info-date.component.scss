@@ -1,9 +1,13 @@
-.extrahour-card {
+b {
+  font-weight: 500;
+}
+
+.info-date-card {
   width: 300px;
   border: 1px solid var(--gray-line);
 }
 
-.extrahour-card:hover {
+.info-date-card:hover {
   border: 1px solid var(--horaplus-blue);
 }
 

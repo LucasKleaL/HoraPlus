@@ -7,6 +7,8 @@ import { IndexExtraHoursComponent } from './pages/extra-hours/index-extra-hours/
 import { AddExtraHoursComponent } from './pages/extra-hours/add-extra-hours/add-extra-hours.component';
 import { IndexEmployeesComponent } from './pages/employees/index-employees/index-employees.component';
 import { AddEmployeesComponent } from './pages/employees/add-employees/add-employees.component';
+import { IndexDaysOffComponent } from './pages/days-off/index-days-off/index-days-off.component';
+import { AddDaysOffComponent } from './pages/days-off/add-days-off/add-days-off.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
   },
   { path: 'extrahours', component: IndexExtraHoursComponent, canActivate: [AuthGuard] },
   { path: 'extrahours/add', component: AddExtraHoursComponent, canActivate: [AuthGuard] },
+  { path: 'daysoff', component: IndexDaysOffComponent, canActivate: [AuthGuard] },
+  { path: 'daysoff/add', component: AddDaysOffComponent, canActivate: [AuthGuard] },
   { path: 'employees', component: IndexEmployeesComponent, canActivate: [AuthGuard] },
   { path: 'employees/add', component: AddEmployeesComponent, canActivate: [AuthGuard] },
 ];

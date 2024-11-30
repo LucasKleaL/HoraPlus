@@ -2,8 +2,17 @@ import { db } from "../util/admin";
 import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
 import DayOff from "../model/DayOff";
+import EmployeeRepository from "./EmployeeRepository";
+import Employee from "../model/Employee";
 
 export default class DayOffRepository extends AppRepository {
+
+    employeeRepository!: EmployeeRepository;
+    
+    constructor() {
+        super();
+        this.employeeRepository = new EmployeeRepository();
+    }
 
     async add(dayOff: DayOff): Promise<any>
     {
@@ -133,7 +142,13 @@ export default class DayOffRepository extends AppRepository {
             }
             const snapshot = await query.get();
 
-            return snapshot;
+            const dayOffsWithEmployees = await Promise.all(snapshot.docs.map(async (doc) => {
+                const dayOffData = doc.data();
+                const employee: Employee = await this.employeeRepository.getById(dayOffData.employee_uid);
+                return { ...dayOffData, uid: doc.id, employee: employee };
+            }));
+
+            return { daysOff: dayOffsWithEmployees, lastDocument: snapshot.docs[snapshot.docs.length - 1] };
         } catch (error) {
             console.error("Error on DayOff getNextPageByUser: ", error);
             throw error;

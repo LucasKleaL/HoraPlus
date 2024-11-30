@@ -1,5 +1,5 @@
 <div class="card-list" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="20px">
-    <mat-card *ngFor="let extraHour of extraHours" class="extrahour-card" [id]="extraHour.uid" [hidden]="isLoading">
+    <mat-card *ngFor="let item of items" class="info-date-card" [id]="item.uid" [hidden]="isLoading">
         <mat-card-actions *ngIf="showActions">
             <button class="card-icon" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" title="Ações">
                 <mat-icon>more_vert</mat-icon>
@@ -18,7 +18,7 @@
         <mat-card-header>
             <mat-card-title>
                 <div class="card-header">
-                    <h5 class="card-title m-2 mb-2 mt-0">{{ extraHour.title }}</h5>
+                    <h5 class="card-title m-2 mb-2 mt-0">{{ item.title }}</h5>
                 </div>
             </mat-card-title>
         </mat-card-header>
@@ -27,20 +27,20 @@
                 <div class="card-widget">
                     <div class="card-widget-title-wrapper">
                         <div class="card-widget-date-primary">
-                            <span class="card-widget-date-day">{{ getMonthAndDay(extraHour.date).day }}</span>
-                            <span class="card-widget-date-month">{{ getMonthAndDay(extraHour.date).month }}</span>
+                            <span class="card-widget-date-day">{{ getMonthAndDay(item.date).day }}</span>
+                            <span class="card-widget-date-month">{{ getMonthAndDay(item.date).month }}</span>
                         </div>
                         <div class="card-widget-meeting-info">
-                            <span class="card-widget-meeting-time">{{ extraHour.date }}</span>
+                            <span class="card-widget-meeting-time">{{ item.date }}</span>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <p class="card-text-info">Quantia de Horas: {{ extraHour.amount }}h</p>
-                        <p class="card-text-info">Funcionario: {{ extraHour.employee.name }}</p>
-                        <p class="card-text-info">Departamento: {{ extraHour.department.description }}</p>
+                        <p class="card-text-info"><b>Quantia de Horas: </b> {{ item.amount }}h</p>
+                        <p class="card-text-info"><b>Funcionario: </b> {{ item.employee.name }}</p>
+                        <p class="card-text-info"><b>Setor: </b> {{ item.employee.department.title }}</p>
                     </div>
                     <div>
-                        <a routerLink="/extrahours/view/{{ extraHour.uid }}" class="btn btn-sm btn-view">Visualizar</a>
+                        <a routerLink="/{{itemModelName}}/view/{{ item.uid }}" class="btn btn-sm btn-view">Visualizar</a>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { IndexExtraHoursComponent } from './pages/extra-hours/index-extra-hours/index-extra-hours.component';
 import { UserService } from './services/user.service';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
-import { CardExtraHourComponent } from './components/card-extra-hour/card-extra-hour.component';
+import { CardInfoDateComponent } from './components/card-info-date/card-info-date.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ExtraHourService } from './services/extra-hour.service';
@@ -35,6 +35,8 @@ import { IndexEmployeesComponent } from './pages/employees/index-employees/index
 import { CardComponent } from './components/card/card.component';
 import { AddEmployeesComponent } from './pages/employees/add-employees/add-employees.component';
 import { InputAutocompleteComponent } from './components/input-autocomplete/input-autocomplete.component';
+import { IndexDaysOffComponent } from './pages/days-off/index-days-off/index-days-off.component';
+import { AddDaysOffComponent } from './pages/days-off/add-days-off/add-days-off.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { InputAutocompleteComponent } from './components/input-autocomplete/inpu
     SignupComponent,
     LoginComponent,
     IndexExtraHoursComponent,
-    CardExtraHourComponent,
+    CardInfoDateComponent,
     AddExtraHoursComponent,
     NavbarComponent,
     BreadcrumbComponent,
@@ -50,6 +52,8 @@ import { InputAutocompleteComponent } from './components/input-autocomplete/inpu
     CardComponent,
     AddEmployeesComponent,
     InputAutocompleteComponent,
+    IndexDaysOffComponent,
+    AddDaysOffComponent,
   ],
   imports: [
     BrowserModule,
