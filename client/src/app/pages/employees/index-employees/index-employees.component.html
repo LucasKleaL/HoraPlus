@@ -16,15 +16,9 @@
                     [pageSize]="pageSize" 
                     [isLoading]="isLoading"
                     [showActions]="showActions"
-                    [cardTitle]="'Funcionário'"
-                    [titleProperty]="'name'"
-                    [titleLabel]="'Nome'"
-                    [descriptionProperty]="'extrahours'"
-                    [descriptionLabel]="'Descrição'"
-                    [tag1Property]="'department'"
-                    [tag1Label]="'Setor'"
-                    [tag2Property]="'role'"
-                    [tag2Label]="'Cargo'"
+                    [cardTitle]="'name'"
+                    [cardDescription]="'description'"
+                    [cardInfos] = "cardInfos"
                     [editItemHandler]="editEmployeeHandler"
                     [deleteItemHandler]="deleteEmployeeHandler">
                 </app-card>
