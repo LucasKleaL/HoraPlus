@@ -18,7 +18,8 @@
         <mat-card-header>
             <mat-card-title>
                 <div class="card-header">
-                    <h5 class="card-title m-2 mb-2 mt-0">{{ cardTitle }}</h5>
+                    <h5 class="card-title m-2 mb-2 mt-0">{{ item[cardTitle] }}</h5>
+                    <p class="card-description m-2 mb-0"> {{ item[cardDescription] }} </p>
                 </div>
             </mat-card-title>
         </mat-card-header>
@@ -26,9 +27,9 @@
             <div class="card-body pt-0 mt-2">
                 <div class="card-widget">
                     <div class="mt-3">
-                        <p class="card-text-info"><b>{{titleLabel}}:</b> {{item[titleProperty]}}</p>
-                        <p class="card-text-info"><b>{{tag1Label}}:</b> {{ item[tag1Property].title }}</p>
-                        <p class="card-text-info"><b>{{tag2Label}}:</b> {{ item[tag2Property].title }}</p>
+                        <p class="card-text-info" *ngFor="let info of cardInfos">
+                            <b>{{ info.label }}:</b> {{ getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix) }}
+                        </p>
                     </div>
                     <div>
                         <a routerLink="/extrahours/view/{{ item.uid }}" class="btn btn-sm btn-view">Visualizar</a>

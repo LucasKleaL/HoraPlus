@@ -21,6 +21,15 @@ export class IndexEmployeesComponent extends AppComponent implements OnInit {
   @Input() deleteEmployeeHandler: ((employee: Employee) => void) = () => {};
   currentPage: number = 1;
   pageSize: number = 10;
+  cardInfos = [
+    { property: 'department', propertyPath: 'title', label: 'Setor', labelPostfix: '' },
+    { property: 'role', propertyPath: 'title', label: 'Cargo', labelPostfix: '' },
+    { property: 'totalExtraHours', propertyPath: '', label: 'Total Horas Extras', labelPostfix: 'h' },
+    { property: 'totalDaysOff', propertyPath: '', label: 'Total Folgas', labelPostfix: 'h' },
+    { property: 'remainingExtraHours', propertyPath: '', label: 'Horas Extras Restantes', labelPostfix: 'h' },
+    { property: 'extraHoursCount', propertyPath: '', label: 'Quantidade de Horas Extras', labelPostfix: '' },
+    { property: 'daysOffCount', propertyPath: '', label: 'Quantidade de Folgas', labelPostfix: '' },
+  ]
 
   constructor(_snackBar: MatSnackBar, router: Router, private employeesService: EmployeeService, private userAuth: UserAuth) {
     super(_snackBar, router);

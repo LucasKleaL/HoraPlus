@@ -4,6 +4,9 @@ import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
 import DepartmentRepository from "./DepartmentRepository";
 import RoleRepository from "./RoleRepository";
+import ExtraHour from "../model/ExtraHour";
+import DayOff from "../model/DayOff";
+import { QuerySnapshot } from "firebase/firestore";
 
 class EmployeeRepository extends AppRepository 
 {
@@ -171,15 +174,7 @@ class EmployeeRepository extends AppRepository
                 query = query.startAfter(lastDocument);
             }
             const snapshot = await query.get();
-    
-            const employeesWithExtraHours = await Promise.all(snapshot.docs.map(async (doc) => {
-                const employeeData = doc.data();
-                const extraHoursSnapshot = await db.collection("ExtraHours")
-                    .where("employee.uid", "==", doc.id)
-                    .get();
-                const extraHours = extraHoursSnapshot.docs.map(extraHourDoc => extraHourDoc.data());
-                return { ...employeeData, uid: doc.id, extraHours };
-            }));
+            const employeesWithExtraHours = await this.getEmployeeExtraHoursAndDaysOff(snapshot);
     
             return { employees: employeesWithExtraHours, lastDocument: snapshot.docs[snapshot.docs.length - 1] };
         } catch (error) {
@@ -215,6 +210,53 @@ class EmployeeRepository extends AppRepository
             console.error("Error on Employee delete: ", error);
             throw error;
         }
+    }
+
+    async getEmployeeExtraHoursAndDaysOff(employee: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData, FirebaseFirestore.DocumentData>)
+    {
+        try {
+            return await Promise.all(employee.docs.map(async (doc) => {
+                let employeeData = doc.data();
+                const extraHoursSnapshot = await db.collection("ExtraHours")
+                    .where("employee_uid", "==", doc.id)
+                    .get();
+                const extraHours = extraHoursSnapshot.docs.map(extraHourDoc => extraHourDoc.data());
+    
+                const daysOffSnapshot = await db.collection("DaysOff")
+                    .where("employee_uid", "==", doc.id)
+                    .get();
+                const daysOff = daysOffSnapshot.docs.map(dayOffDoc => dayOffDoc.data());
+    
+                employeeData = this.setExtraHoursData(employeeData, extraHours, daysOff);
+                return { ...employeeData, uid: doc.id, extraHours, daysOff };
+            }));
+        } catch (error) {
+            console.error("Error on Employee getEmployeeExtraHoursAndDaysOff ", error);
+            throw error;
+        }
+    }
+
+    setExtraHoursData(employee: any, extraHours: any[], daysOff: any[])
+    {
+        const totalExtraHoursMinutes = extraHours.reduce((total, item) => {
+            return total + this.timeStringToMinutes(item.amount);
+        }, 0);
+        const totalDaysOffMinutes = daysOff.reduce((total, item) => {
+            return total + this.timeStringToMinutes(item.amount);
+        }, 0);
+
+        const employeeRemainingMinutes = totalExtraHoursMinutes - totalDaysOffMinutes;
+        const employeeRemainingHours = this.minutesToTimeString(employeeRemainingMinutes);
+        const employeeWithExtraHours = {
+            ...employee,
+            totalExtraHours: this.minutesToTimeString(totalExtraHoursMinutes),
+            totalDaysOff: this.minutesToTimeString(totalDaysOffMinutes),
+            extraHoursCount: extraHours.length,
+            daysOffCount: daysOff.length,
+            remainingExtraHours: employeeRemainingHours,
+        };
+
+        return employeeWithExtraHours;
     }
 }
 

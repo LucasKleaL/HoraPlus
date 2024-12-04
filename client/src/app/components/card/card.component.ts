@@ -16,20 +16,21 @@ export class CardComponent implements OnInit {
   @Input() isLoading: boolean = false;
   @Input() showActions: boolean = false;
   @Input() cardTitle: string = '';
-  @Input() titleProperty: string = '';
-  @Input() titleLabel: string = '';
-  @Input() descriptionProperty: string = '';
-  @Input() descriptionLabel: string = '';
-  @Input() tag1Property: string = '';
-  @Input() tag1Label: string = '';
-  @Input() tag2Property: string = '';
-  @Input() tag2Label: string = '';
+  @Input() cardDescription: string = '';
+  @Input() cardInfos: { property: string, propertyPath: string, label: string, labelPostfix: string }[] = [];
   @Input() editItemHandler: ((item: any) => void) = () => {};
   @Input() deleteItemHandler: ((item: any) => void) = () => {};
 
   constructor(private router: Router, private userAuth: UserAuth, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+  }
+
+  getNestedProperty(item: any, property: string, propertyPath: string, postfix: string): string {
+    if (propertyPath === '') {
+      return item[property] + postfix;
+    }
+    return item[property][propertyPath] + postfix;
   }
   
 }
