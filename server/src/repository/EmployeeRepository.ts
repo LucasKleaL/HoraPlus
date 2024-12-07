@@ -146,6 +146,26 @@ class EmployeeRepository extends AppRepository
         }
     }
 
+    async getAllByUser(userUid: string): Promise<any>
+    {
+        try {
+            let query = db
+                .collection("Employees")
+                .where("user_uid", '==', userUid)
+                .where("deleted", "==", null);
+            const snapshot = await query.get();
+            const employees = snapshot.docs.map((doc) => {
+                const data = doc.data();
+                return { ...data, uid: doc.id };
+            });
+
+            return employees;
+        } catch (error) {
+            console.error("Error to get all Employees: ", error);
+            throw error;
+        }
+    }
+
     async getTotalEmployeesByUser(userUid: string): Promise<number>
     {
         try {

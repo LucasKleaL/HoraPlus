@@ -14,7 +14,7 @@ dayOffRouter.post(
             title: Joi.string().required().max(30),
             description: Joi.string().optional(),
             date: Joi.date().required(),
-            amount: Joi.number().required(),
+            amount: Joi.string().required(),
         })
     }), dayOffController.add as RequestHandler
 );

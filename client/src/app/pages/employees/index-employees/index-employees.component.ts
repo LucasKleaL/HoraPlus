@@ -48,7 +48,7 @@ export class IndexEmployeesComponent extends AppComponent implements OnInit {
   async getEmployees(): Promise<void> {
     this.isLoading = true;
     try {
-      const response = await this.employeesService.getEmployees(this.userAuth.currentUser?.uid || '');
+      const response = await this.employeesService.getEmployeesPaginated(this.userAuth.currentUser?.uid || '');
       this.employees = response.body.employees;
       this.totalEmployees = this.employees.length;
       this.isLoading = false;

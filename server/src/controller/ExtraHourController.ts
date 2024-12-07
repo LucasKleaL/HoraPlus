@@ -41,7 +41,7 @@ class ExtraHourController {
         }
     }
 
-    async getAllByUser(req: Request, res: Response): Promise<void>
+    async getAllByUserPaginated(req: Request, res: Response): Promise<void>
     {
         try {
             const page = parseInt(req.query.page as string) || 1;
@@ -62,14 +62,14 @@ class ExtraHourController {
                     lastDocument = previousDocuments[totalDocuments - 1];
                 }
             }
-            const totalExtraHoursSnapshot = await extraHourRepository.getTotalExtraHoursByUser(userUid);
+            const totalExtraHoursSnapshot = await extraHourRepository.getTotalByUser(userUid);
             const currentPageSnapshot = await extraHourRepository.getNextPageByUser(
                 userUid,
                 limit,
                 lastDocument,
             );
-            const extraHours = currentPageSnapshot.docs.map((doc) => {
-                const data = doc.data();
+            const extraHours = currentPageSnapshot.extraHours.map((doc: any) => {
+                const data = doc;
                 return { ...data, uid: doc.id };
             });
 

@@ -7,7 +7,7 @@
         <div class="add-button-container">
             <button class="btn btn-primary add-button" (click)="changeActiveRoute('daysoff/add')"><i class="bi bi-plus"></i>Novo</button>
         </div>
-        <div class="card-body" *ngIf="!isLoading">
+        <div class="card-body" *ngIf="!isLoading && daysOff.length > 0">
             <div class="row col-md-12" style="padding: 40px">
                 <app-card-info-date 
                     [items]="daysOff" 
@@ -20,10 +20,8 @@
                     [editItemHandler]="editDayOffHandler"
                     [deleteItemHandler]="deleteDayOffHandler">
                 </app-card-info-date>
-                <div *ngIf="!isLoading && daysOff.length === 0" class="no-items-message">
-                    Nenhuma folga encontrada.
-                </div>
-                <mat-paginator 
+                
+                <mat-paginator
                     id="mat-paginator-bottom" 
                     [length]="totalDaysOff" 
                     [pageSize]="pageSize"
@@ -33,4 +31,8 @@
                 </mat-paginator>
             </div>
         </div>
+        <div *ngIf="!isLoading && daysOff.length === 0" class="no-items-section">
+            <span>Nenhuma <b> folga </b> encontrada.</span>
+        </div>
     </div>
+</div>

@@ -2,8 +2,17 @@ import { db } from "../util/admin";
 import ExtraHour from "../model/ExtraHour";
 import AppRepository from "./AppRepository";
 import * as admin from 'firebase-admin';
+import Employee from "../model/Employee";
+import EmployeeRepository from "./EmployeeRepository";
 
 class ExtraHourRepository extends AppRepository {
+
+    employeeRepository!: EmployeeRepository;
+    
+    constructor() {
+        super();
+        this.employeeRepository = new EmployeeRepository();
+    }
 
     async add(extraHour: ExtraHour): Promise<any>
     {
@@ -60,7 +69,7 @@ class ExtraHourRepository extends AppRepository {
         }
     }
 
-    async getTotalExtraHoursByUser(userUid: string): Promise<number>
+    async getTotalByUser(userUid: string): Promise<number>
     {
         try {
             const querySnapshot = await db
@@ -76,7 +85,7 @@ class ExtraHourRepository extends AppRepository {
         }
     }
 
-    async getNextPageByUser(userUid: string, limit: number, lastDocument?: admin.firestore.QueryDocumentSnapshot): Promise<admin.firestore.QuerySnapshot>
+    async getNextPageByUser(userUid: string, limit: number, lastDocument?: admin.firestore.QueryDocumentSnapshot): Promise<any>
     {
         try {
             let query = db
@@ -90,7 +99,13 @@ class ExtraHourRepository extends AppRepository {
             }
             const snapshot = await query.get();
 
-            return snapshot;
+            const extraHoursWithEmployees = await Promise.all(snapshot.docs.map(async (doc) => {
+                const extraHourData = doc.data();
+                const employee: Employee = await this.employeeRepository.getById(extraHourData.employee_uid);
+                return { ...extraHourData, uid: doc.id, employee: employee };
+            }));
+
+            return { extraHours: extraHoursWithEmployees, lastDocument: snapshot.docs[snapshot.docs.length - 1] };
         } catch (error) {
             console.error("Error on ExtraHour getNextPageByUser: ", error);
             throw error;

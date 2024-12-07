@@ -23,8 +23,13 @@ employeeRouter.get(
 );
 
 employeeRouter.get(
-    '/employees/user/:user_uid',
+    '/employees/user/:uid',
     employeeController.getAllByUser as RequestHandler
+);
+
+employeeRouter.get(
+    '/employees/paginated/:user_uid',
+    employeeController.getAllByUserPaginated as RequestHandler
 );
 
 employeeRouter.patch(

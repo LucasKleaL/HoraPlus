@@ -23,12 +23,12 @@
                         <p>O nome é obrigatório.*</p>
                     </div>
                     
-                    <app-input-autocomplete [options]="departments" [placeholder]="'Setor'" [inputControl]="departmentControl"></app-input-autocomplete>
+                    <app-input-autocomplete [options]="departments" [placeholder]="'Setor'" [inputControl]="departmentControl" [formDir]="formDir"></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="department.invalid && formDir.submitted">
                         <p>O setor é obrigatório*</p>
                     </div>
                     
-                    <app-input-autocomplete [options]="roles" [placeholder]="'Cargo'" [inputControl]="roleControl"></app-input-autocomplete>
+                    <app-input-autocomplete [options]="roles" [placeholder]="'Cargo'" [inputControl]="roleControl" [formDir]="formDir"></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="role.invalid && formDir.submitted">
                         <p>O cargo é obrigatório*</p>
                     </div>

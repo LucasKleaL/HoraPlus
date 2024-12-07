@@ -5,17 +5,18 @@
         <span class="bi bi-file-text"></span>
     </div>
     <input 
+        matInput
         [formControl]="inputControl" 
         type="text"
         class="form-control" 
         placeholder={{placeholder}}
         id="inputAutocomplete {{placeholder}}" 
-        matInput 
-        [matAutocomplete]="roleAutocomple"
+        [matAutocomplete]="auto"
+        [ngClass]="{ 'is-invalid': inputControl.invalid && formDir.submitted }"
     >
-    <mat-autocomplete #roleAutocomple="matAutocomplete" [displayWith]="displayFn">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{ option.title }}
+          {{ option[displayProperty] }}
         </mat-option>
-    </mat-autocomplete>
+      </mat-autocomplete>
 </div>

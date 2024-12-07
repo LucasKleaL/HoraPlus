@@ -7,7 +7,7 @@
         <div class="add-button-container">
             <button class="btn btn-primary add-button" (click)="changeActiveRoute('employees/add')"><i class="bi bi-plus"></i>Novo</button>
         </div>
-        <div class="card-body" *ngIf="!isLoading">
+        <div class="card-body" *ngIf="!isLoading && employees.length > 0">
             <div class="row col-md-12" style="padding: 40px">
                 <app-card
                     [items]="employees" 
@@ -22,10 +22,7 @@
                     [editItemHandler]="editEmployeeHandler"
                     [deleteItemHandler]="deleteEmployeeHandler">
                 </app-card>
-                <div *ngIf="!isLoading && employees.length === 0" class="no-items-message">
-                    Nenhum funcionário encontrado.
-                </div>
-                <mat-paginator 
+                <mat-paginator
                     id="mat-paginator-bottom" 
                     [length]="totalEmployees" 
                     [pageSize]="pageSize"
@@ -34,6 +31,9 @@
                     aria-label="Select page">
                 </mat-paginator>
             </div>
+        </div>
+        <div *ngIf="!isLoading && employees.length === 0" class="no-items-section">
+            <span>Nenhum <b> funcionário </b> encontrado.</span>
         </div>
     </div>
 </div>

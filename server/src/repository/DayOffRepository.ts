@@ -20,6 +20,7 @@ export default class DayOffRepository extends AppRepository {
             let result;
             const newDayOff = {
                 ...dayOff,
+                date: this.formatDateTime(new Date(Date.parse(dayOff.date))),
                 created: this.getDateTime(),
                 modified: null,
                 deleted: null,

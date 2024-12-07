@@ -12,9 +12,9 @@ export class ExtraHourService {
 
     constructor(private http: HttpClient) { }
 
-    public async getExtraHours(userUid: string): Promise<HttpResponse<any>> {
+    public async getExtraHoursPaginated(userUid: string): Promise<HttpResponse<any>> {
         try {
-            return await firstValueFrom(this.http.get<string>(this.api + '/user/' + userUid, { observe: 'response' }));
+            return await firstValueFrom(this.http.get<string>(this.api + '/paginated/' + userUid, { observe: 'response' }));
         } catch (error) {
             console.error(error);
             throw error;

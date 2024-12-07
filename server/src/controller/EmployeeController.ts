@@ -44,6 +44,25 @@ class EmployeeController
     async getAllByUser(req: Request, res: Response): Promise<void>
     {
         try {
+            const userUid = req.params.uid;
+            const result = await employeeRepository.getAllByUser(userUid);
+
+            if (result) {
+                res.status(200).json({ statusCode: 200, employees: result });
+            } else {
+                res.status(404).json({ statusCode: 404, error: "Employee/not-found" });
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error("Employee/failed-getAllByUser ", error.message);
+                res.status(500).json({ statusCode: 500, error: "Employee/failed-getAllByUser", message: error.message });
+            }
+        }
+    }
+
+    async getAllByUserPaginated(req: Request, res: Response): Promise<void>
+    {
+        try {
             const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
             const userUid = req.params.user_uid;
@@ -76,8 +95,8 @@ class EmployeeController
             res.status(200).json({ employees, total: totalEmployeesSnapshot, currentPage: page })
         } catch (error) {
             if (error instanceof Error) {
-                console.error("Employee/failed-getAllByUser ", error.message);
-                res.status(500).json({ statusCode: 500, error: "Employee/failed-getAllByUser", message: error.message });
+                console.error("Employee/failed-getAllByUserPaginated ", error.message);
+                res.status(500).json({ statusCode: 500, error: "Employee/failed-getAllByUserPaginated", message: error.message });
             }
         }
     }

@@ -7,7 +7,7 @@
         <div class="add-button-container">
             <button class="btn btn-primary add-button" (click)="changeActiveRoute('extrahours/add')"><i class="bi bi-plus"></i>Novo</button>
         </div>
-        <div class="card-body" *ngIf="!isLoading">
+        <div class="card-body" *ngIf="!isLoading && extraHours.length > 0">
             <div class="row col-md-12" style="padding: 40px">
                 <app-card-info-date 
                     [items]="extraHours" 
@@ -20,9 +20,6 @@
                     [editItemHandler]="editExtraHourHandler"
                     [deleteItemHandler]="deleteExtraHourHandler">
                 </app-card-info-date>
-                <div *ngIf="!isLoading && extraHours.length === 0" class="no-items-message">
-                    Nenhuma hora extra encontrada.
-                </div>
                 <mat-paginator 
                     id="mat-paginator-bottom" 
                     [length]="totalExtraHours" 
@@ -33,4 +30,8 @@
                 </mat-paginator>
             </div>
         </div>
+        <div *ngIf="!isLoading && extraHours.length === 0" class="no-items-section">
+            <span>Nenhuma <b> hora extra </b> encontrada.</span>
+        </div>
     </div>
+</div>
