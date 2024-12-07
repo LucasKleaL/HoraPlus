@@ -36,19 +36,14 @@
                             id="description"
                         >
                     </div>
-                    <div class="mb-3 input-group">
-                        <div class="input-group-text">
-                            <span class="bi bi-person"></span>
-                        </div>
-                        <input 
-                            [formControl]="employee"
-                            [ngClass]="{ 'is-invalid': employee.invalid && formDir.submitted }"
-                            type="text"
-                            class="form-control"
-                            placeholder="Funcionário"
-                            id="employee"
-                        >
-                    </div>
+                    
+                    <app-input-autocomplete 
+                        [options]="employees" 
+                        [placeholder]="'Funcionário'" 
+                        [inputControl]="employeeControl" 
+                        [displayProperty]="'name'"
+                        [formDir]="formDir"
+                    ></app-input-autocomplete>
                     <div class="row validation-error" *ngIf="employee.invalid && formDir.submitted">
                         <p>O funcionário é obrigatório*</p>
                     </div>

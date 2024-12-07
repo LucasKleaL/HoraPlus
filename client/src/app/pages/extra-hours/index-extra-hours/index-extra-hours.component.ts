@@ -27,19 +27,19 @@ export class IndexExtraHoursComponent extends AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getExtraHours();
+    this.getExtraHoursPaginated();
   }
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
-    this.getExtraHours();
+    this.getExtraHoursPaginated();
   }
 
-  async getExtraHours(): Promise<void> {
+  async getExtraHoursPaginated(): Promise<void> {
     this.isLoading = true;
     try {
-      const response = await this.extraHoursService.getExtraHours(this.userAuth.currentUser?.uid || '');
+      const response = await this.extraHoursService.getExtraHoursPaginated(this.userAuth.currentUser?.uid || '');
       this.extraHours = response.body.extraHours;
       this.totalExtraHours = this.extraHours.length;
       this.isLoading = false;

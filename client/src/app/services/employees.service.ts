@@ -12,9 +12,18 @@ export class EmployeeService {
 
     constructor(private http: HttpClient) { }
 
-    public async getEmployees(userUid: string): Promise<HttpResponse<any>> {
+    public async getAllEmployeesByUser(userUid: string): Promise<HttpResponse<any>> {
         try {
             return await firstValueFrom(this.http.get<string>(this.api + '/user/' + userUid, { observe: 'response' }));
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    public async getEmployeesPaginated(userUid: string): Promise<HttpResponse<any>> {
+        try {
+            return await firstValueFrom(this.http.get<string>(this.api + '/paginated/' + userUid, { observe: 'response' }));
         } catch (error) {
             console.error(error);
             throw error;

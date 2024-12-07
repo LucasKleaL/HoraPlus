@@ -7,8 +7,8 @@ export class DayOff {
         public title: string,
         public date: Date,
         public amount: string,
-        public employee?: Employee,
         public description?: string,
         public uid?: string,
+        public employee?: Employee,
     ) {}
 }

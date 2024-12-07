@@ -13,6 +13,8 @@ export class InputAutocompleteComponent implements OnInit {
   @Input() options: any[] = [];
   @Input() placeholder: string = '';
   @Input() inputControl!: FormControl;
+  @Input() formDir!: any;
+  @Input() displayProperty: string = 'title';
   filteredOptions!: Observable<any[]>;
 
   ngOnInit() {
@@ -22,8 +24,8 @@ export class InputAutocompleteComponent implements OnInit {
     );
   }
 
-  displayFn(option: any): string {
-    return option && option.title ? option.title : '';
+  displayFn = (option: any): string => {
+    return option && option[this.displayProperty] ? option[this.displayProperty] : '';
   }
 
   private _filter(value: string): any[] {
@@ -31,6 +33,6 @@ export class InputAutocompleteComponent implements OnInit {
       return this.options;
     }
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option[this.displayProperty].toLowerCase().includes(filterValue));
   }
 }

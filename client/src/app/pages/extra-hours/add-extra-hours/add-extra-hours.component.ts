@@ -5,7 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { UserAuth } from 'src/app/auth/User.Auth';
+import { Employee } from 'src/app/models/employee.model';
 import { ExtraHour } from 'src/app/models/extra-hour.model';
+import { EmployeeService } from 'src/app/services/employees.service';
 import { ExtraHourService } from 'src/app/services/extra-hour.service';
 
 @Component({
@@ -17,8 +19,8 @@ export class AddExtraHoursComponent extends AppComponent implements OnInit {
   extraHourForm!: FormGroup;
   title = new FormControl('', [Validators.required]);
   description = new FormControl('', []);
-  department = new FormControl('', [Validators.required]);
-  employee = new FormControl('', [Validators.required]);
+  employee = new FormControl<string | Employee>('', [Validators.required]);
+  employees: Employee[] = [];
   date = new FormControl('', [Validators.required]);
   amountHours = new FormControl('00:00', [Validators.required, this.amountHoursValidator()]);
   isDateFocused: boolean = false;
@@ -28,44 +30,58 @@ export class AddExtraHoursComponent extends AppComponent implements OnInit {
   constructor(
     _snackBar: MatSnackBar,
     router: Router,
-    private extraHourService: ExtraHourService, 
+    private extraHourService: ExtraHourService,
+    private employeeService: EmployeeService,
     private userAuth: UserAuth, 
     private datePipe: DatePipe
   ) {
     super(_snackBar, router);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const date = new Date();
     const formatDate = this.datePipe.transform(date, 'yyyy-MM-ddTHH:mm');
     this.date.setValue(formatDate);
     this.extraHourForm = new FormGroup({
       title: this.title,
       description: this.description,
-      department: this.department,
       employee: this.employee,
       date: this.date,
       amountHours: this.amountHours,
     });
+    await this.getEmployees();
+  }
+
+  async getEmployees(): Promise<void> {
+    try {
+      this.isLoading = true;
+      const response = await this.employeeService.getAllEmployeesByUser(this.userAuth.currentUser?.uid ?? '');
+      this.employees = response.body.employees;
+      this.isLoading = false;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  get employeeControl(): FormControl {
+    return this.extraHourForm.get('employee') as FormControl;
   }
 
   async addExtraHour() {
     try {
       this.isLoading = true;
       const userUid = this.userAuth.currentUser?.uid ?? '';
+      const employeeUid = this.extraHourForm.get("employee")?.value.uid;
       const title = this.extraHourForm.get("title")?.value;
       const description = this.extraHourForm.get("description")?.value;
-      const department = { uid: '', description: this.extraHourForm.get("department")?.value};
-      const employee = { uid: '', name: this.extraHourForm.get("employee")?.value}
       const date = new Date(this.extraHourForm.get("date")?.value);
       const amountHours = this.extraHourForm.get("amountHours")?.value;
       const extraHour = new ExtraHour(
         userUid,
+        employeeUid,
         title,
         date,
         amountHours,
-        employee,
-        department,
         description,
       );
 

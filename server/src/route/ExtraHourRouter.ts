@@ -10,12 +10,11 @@ extraHourRouter.post(
     celebrate({
         body: Joi.object({
             user_uid: Joi.string().required(),
-            title: Joi.string().required(),
+            employee_uid: Joi.string().required(),
+            title: Joi.string().required().max(30),
             description: Joi.optional(),
             date: Joi.date().required(),
             amount: Joi.string().required(),
-            employee: Joi.object().required(),
-            department: Joi.object().required(),
         })
     }), extraHourController.add as RequestHandler
 );
@@ -26,8 +25,8 @@ extraHourRouter.get(
 );
 
 extraHourRouter.get(
-    '/extrahours/user/:user_uid',
-    extraHourController.getAllByUser as RequestHandler
+    '/extrahours/paginated/:user_uid',
+    extraHourController.getAllByUserPaginated as RequestHandler
 );
 
 extraHourRouter.patch(
