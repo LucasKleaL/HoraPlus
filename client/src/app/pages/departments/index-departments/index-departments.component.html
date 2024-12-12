@@ -1,0 +1,39 @@
+<div>
+    <div class="loading-spinner" *ngIf="isLoading">
+        <mat-spinner [diameter]="85"></mat-spinner>
+    </div>
+    <div class="row">
+        <app-breadcrumb></app-breadcrumb>
+        <div class="add-button-container">
+            <button class="btn btn-primary add-button" (click)="changeActiveRoute('departments/add')"><i class="bi bi-plus"></i>Novo</button>
+        </div>
+        <div class="card-body" *ngIf="!isLoading && departments.length > 0">
+            <div class="row col-md-12" style="padding: 40px">
+                <app-card
+                    [items]="departments" 
+                    [totalItems]="totalDepartments"
+                    [currentPage]="currentPage" 
+                    [pageSize]="pageSize" 
+                    [isLoading]="isLoading"
+                    [showActions]="showActions"
+                    [cardTitle]="'title'"
+                    [cardDescription]="'description'"
+                    [cardInfos] = "cardInfos"
+                    [editItemHandler]="editDepartmentHandler"
+                    [deleteItemHandler]="deleteDepartmentHandler">
+                </app-card>
+                <mat-paginator
+                    id="mat-paginator-bottom" 
+                    [length]="totalDepartments" 
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[5, 10, 25, 50]" 
+                    [pageIndex]="currentPage - 1" (page)="onPageChange($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+        <div *ngIf="!isLoading && departments.length === 0" class="no-items-section">
+            <span>Nenhum <b> funcionário </b> encontrado.</span>
+        </div>
+    </div>
+</div>

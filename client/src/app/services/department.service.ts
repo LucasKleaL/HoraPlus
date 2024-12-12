@@ -19,4 +19,13 @@ export class DepartmentService {
             throw error;
         }
     }
+
+    public async getDepartmentsPaginated(userUid: string): Promise<HttpResponse<any>> {
+        try {
+            return await firstValueFrom(this.http.get<string>(this.api + '/paginated/' + userUid, { observe: 'response' }));
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

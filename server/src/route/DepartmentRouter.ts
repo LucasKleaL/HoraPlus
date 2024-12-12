@@ -18,7 +18,12 @@ departmentRouter.post('/departments',
 departmentRouter.get(
     '/departments/user/:uid',
     departmentController.getAllByUser as RequestHandler
-)
+);
+
+departmentRouter.get(
+    '/departments/paginated/:user_uid',
+    departmentController.getAllByUserPaginated as RequestHandler
+);
 
 departmentRouter.get(
     '/departments/:uid',
