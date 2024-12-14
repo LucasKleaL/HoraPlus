@@ -10,6 +10,7 @@ import { AddEmployeesComponent } from './pages/employees/add-employees/add-emplo
 import { IndexDaysOffComponent } from './pages/days-off/index-days-off/index-days-off.component';
 import { AddDaysOffComponent } from './pages/days-off/add-days-off/add-days-off.component';
 import { IndexDepartmentsComponent } from './pages/departments/index-departments/index-departments.component';
+import { AddDepartmentsComponent } from './pages/departments/add-departments/add-departments.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'employees', component: IndexEmployeesComponent, canActivate: [AuthGuard] },
   { path: 'employees/add', component: AddEmployeesComponent, canActivate: [AuthGuard] },
   { path: 'departments', component: IndexDepartmentsComponent, canActivate: [AuthGuard] },
+  { path: 'departments/add', component: AddDepartmentsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

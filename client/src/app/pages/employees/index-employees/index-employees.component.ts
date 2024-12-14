@@ -22,13 +22,13 @@ export class IndexEmployeesComponent extends AppComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 10;
   cardInfos = [
-    { property: 'department', propertyPath: 'title', label: 'Setor', labelPostfix: '' },
-    { property: 'role', propertyPath: 'title', label: 'Cargo', labelPostfix: '' },
-    { property: 'totalExtraHours', propertyPath: '', label: 'Total Horas Extras', labelPostfix: 'h' },
-    { property: 'totalDaysOff', propertyPath: '', label: 'Total Folgas', labelPostfix: 'h' },
-    { property: 'remainingExtraHours', propertyPath: '', label: 'Horas Extras Restantes', labelPostfix: 'h' },
-    { property: 'extraHoursCount', propertyPath: '', label: 'Quantidade de Horas Extras', labelPostfix: '' },
-    { property: 'daysOffCount', propertyPath: '', label: 'Quantidade de Folgas', labelPostfix: '' },
+    { property: 'department', propertyPath: 'title', label: 'Setor', labelPostfix: '', color: false, colorTag: true },
+    { property: 'role', propertyPath: 'title', label: 'Cargo', labelPostfix: '', color: false, colorTag: true },
+    { property: 'totalExtraHours', propertyPath: '', label: 'Total Horas Extras', labelPostfix: 'h', color: false, colorTag: false },
+    { property: 'totalDaysOff', propertyPath: '', label: 'Total Folgas', labelPostfix: 'h', color: false, colorTag: false },
+    { property: 'remainingExtraHours', propertyPath: '', label: 'Horas Extras Restantes', labelPostfix: 'h', color: false, colorTag: false },
+    { property: 'extraHoursCount', propertyPath: '', label: 'Quantidade de Horas Extras', labelPostfix: '', color: false, colorTag: false },
+    { property: 'daysOffCount', propertyPath: '', label: 'Quantidade de Folgas', labelPostfix: '', color: false, colorTag: false },
   ]
 
   constructor(_snackBar: MatSnackBar, router: Router, private employeesService: EmployeeService, private userAuth: UserAuth) {

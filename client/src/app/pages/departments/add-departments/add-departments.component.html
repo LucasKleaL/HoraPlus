@@ -1,0 +1,73 @@
+<div>
+    <div class="loading-spinner" *ngIf="isLoading">
+        <mat-spinner [diameter]="85"></mat-spinner>
+    </div>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-lg-4 text-center form-card">
+            <form [formGroup]="departmentForm" #formDir="ngForm" (submit)="formDir.valid && addDepartment()">
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-chat-square-text"></span>
+                        </div>
+                        <input 
+                            [formControl]="title"
+                            [ngClass]="{ 'is-invalid': title.invalid && formDir.submitted }" 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Nome"
+                            id="title"
+                        >
+                    </div>
+                    <div class="row validation-error" *ngIf="title.invalid && formDir.submitted">
+                        <p *ngIf="title.errors?.['required']">O título é obrigatório.*</p>
+                        <p *ngIf="title.errors?.['minlength']">O título deve ter no mínimo 2 caracteres.*</p>
+                        <p *ngIf="title.errors?.['maxlength']">O título deve ter no máximo 50 caracteres.*</p>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <div class="input-group-text">
+                            <span class="bi bi-chat-square-text"></span>
+                        </div>
+                        <input 
+                            [formControl]="description"
+                            [ngClass]="{ 'is-invalid': description.invalid && formDir.submitted }" 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Descrição"
+                            id="description"
+                            maxlength="50"
+                        >
+                    </div>
+                    <div class="row validation-error" *ngIf="description.invalid && formDir.submitted">
+                        <p>O tamanho máximo de descrição é de 50 caracteres.</p>
+                    </div>
+
+                    <div>
+                        <label for="color" class="form-label">Cor da Tag</label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <span class="bi bi-palette"></span>
+                            </div>
+                            <input 
+                                [formControl]="color"
+                                [ngClass]="{ 'is-invalid': color.invalid && formDir.submitted }" 
+                                type="color" 
+                                class="form-control input-color"
+                                id="color"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="btn btn-primary btn-rounded">
+                            Adicionar
+                        </button>
+                        <button class="btn btn-outline-secondary btn-rounded back-button" (click)="changeActiveRoute('departments')">
+                            Voltar
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ type Department = {
     user_uid: string,
     title: string,
     description?: string,
+    color?: string,
     employees?: Array<string>,
 }
 

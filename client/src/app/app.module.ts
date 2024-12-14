@@ -38,6 +38,7 @@ import { InputAutocompleteComponent } from './components/input-autocomplete/inpu
 import { IndexDaysOffComponent } from './pages/days-off/index-days-off/index-days-off.component';
 import { AddDaysOffComponent } from './pages/days-off/add-days-off/add-days-off.component';
 import { IndexDepartmentsComponent } from './pages/departments/index-departments/index-departments.component';
+import { AddDepartmentsComponent } from './pages/departments/add-departments/add-departments.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { IndexDepartmentsComponent } from './pages/departments/index-departments
     IndexDaysOffComponent,
     AddDaysOffComponent,
     IndexDepartmentsComponent,
+    AddDepartmentsComponent,
   ],
   imports: [
     BrowserModule,
