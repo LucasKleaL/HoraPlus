@@ -10,7 +10,7 @@ import { DepartmentService } from 'src/app/services/department.service';
 @Component({
   selector: 'app-index-departments',
   templateUrl: './index-departments.component.html',
-  styleUrls: ['./index-departments.component.css']
+  styleUrls: ['./index-departments.component.scss']
 })
 export class IndexDepartmentsComponent extends AppComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -22,8 +22,9 @@ export class IndexDepartmentsComponent extends AppComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 10;
   cardInfos = [
-    { property: 'created', propertyPath: '', label: 'Data de Criação', labelPostfix: '' },
-  ]
+    { property: 'created', propertyPath: '', label: 'Data de Criação', labelPostfix: '', color: false, colorTag: false },
+    { property: 'color', propertyPath: '', label: 'Cor', labelPostfix: '', color: true, colorTag: false },
+  ];
 
   constructor(_snackBar: MatSnackBar, router: Router, private departmentService: DepartmentService, private userAuth: UserAuth) {
     super(_snackBar, router);

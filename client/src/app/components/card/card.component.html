@@ -27,9 +27,29 @@
             <div class="card-body pt-0 mt-2">
                 <div class="card-widget">
                     <div class="mt-3">
-                        <p class="card-text-info" *ngFor="let info of cardInfos">
-                            <b>{{ info.label }}:</b> {{ getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix) }}
-                        </p>
+                        <div *ngFor="let info of cardInfos">
+                            <p class="card-text-info" *ngIf="!info.color && !info.colorTag">
+                                <b>{{ info.label }}:</b> {{ getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix) }}
+                            </p>
+                            <div *ngIf="!info.color && info.colorTag" class="color-container">
+                                <b>{{ info.label }}:</b> 
+                                <div 
+                                    class="color-tag" 
+                                    [style.background-color]="item[info.property].color"
+                                >
+                                    {{ getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix) }}
+                                </div>
+                            </div>
+                            <div *ngIf="info.color && !info.colorTag" class="color-container">
+                                <b>Cor:</b> 
+                                <div 
+                                    class="color-circle" 
+                                    [style.background-color]="getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix)"
+                                >
+                                    {{ getNestedProperty(item, info.property, info.propertyPath, info.labelPostfix) }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <a routerLink="/extrahours/view/{{ item.uid }}" class="btn btn-sm btn-view">Visualizar</a>

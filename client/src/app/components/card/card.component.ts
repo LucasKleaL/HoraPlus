@@ -17,13 +17,14 @@ export class CardComponent implements OnInit {
   @Input() showActions: boolean = false;
   @Input() cardTitle: string = '';
   @Input() cardDescription: string = '';
-  @Input() cardInfos: { property: string, propertyPath: string, label: string, labelPostfix: string }[] = [];
+  @Input() cardInfos: { property: string, propertyPath: string, label: string, labelPostfix: string, color: boolean, colorTag: boolean }[] = [];
   @Input() editItemHandler: ((item: any) => void) = () => {};
   @Input() deleteItemHandler: ((item: any) => void) = () => {};
 
   constructor(private router: Router, private userAuth: UserAuth, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    console.log(this.items);
   }
 
   getNestedProperty(item: any, property: string, propertyPath: string, postfix: string): string {
